@@ -86,8 +86,16 @@ mapred --daemon start historyserver
 for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
 
-Start:  
+Start:   
 ```
 for i in `seq 3 6`; do virsh start u$i; done
 ansible u3 -a "start-all.sh";
+ansible u3 -a "mapred --daemon start historyserver";
+```
+
+Stop:  
+```
+ansible u3 -a "mapred --daemon stop historyserver";
+ansible u3 -a "stop-all.sh";
+for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
