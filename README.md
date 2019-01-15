@@ -139,8 +139,8 @@ For normal build this is fine:
 
 I use this one:
 ```
-./build/mvn -name henry-spark \
-  --pip --r -tgz  -Psparkr -Phive \
+./build/mvn \
+  -Psparkr -Phive \
   -Pkubernetes \
   -Phive-thriftserver -Pmesos -Pyarn \
   -Phadoop-3.1 -Dhadoop.version=3.1.1 \
