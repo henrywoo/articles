@@ -147,6 +147,8 @@ I use this one:
   -DskipTests clean package
 ```
 
+![](img/Peek 2019-01-15 13-22.gif)
+
 REF: https://spark.apache.org/docs/latest/building-spark.html
 
 
