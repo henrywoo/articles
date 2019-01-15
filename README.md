@@ -110,6 +110,10 @@ ansible u3 -a "stop-all.sh";
 for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
 
+http://u3:8088/cluster  
+![](img/hadoop.gif)
+
+
 ## Spark
 
 Build from source since I could not find spark for hadoop 3.1.1
