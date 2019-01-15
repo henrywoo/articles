@@ -138,7 +138,7 @@ I use this one:
 
 
 Run Spark with Yarn:  
-![](img/hadoop.gif)
+![](img/spark_yarn.gif)
 
 REF: https://spark.apache.org/docs/latest/building-spark.html
 
