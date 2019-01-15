@@ -79,13 +79,12 @@ drwxr-xr-x  3 libvirt-qemu henry   4096 Aug  1 21:28 sbin/
 drwxr-xr-x  4 libvirt-qemu henry   4096 Aug  1 22:17 share/
 ```
 
-
-
-name node: u3
+name node: u3  
 data node: u4,u5,u6
 
-```
+### prepare for hadoop folders
 
+```
 for i in `seq 3 6`; do
 ansible u$i -a "rm -fr /opt/hadoop";
 done
@@ -99,18 +98,20 @@ ansible u$i -a "mkdir -p /opt/hadoop/mr-history/done";
 done
 
 ansible u3 -a "mkdir -p /opt/hadoop/name";
+```
 
-[616][u3][0][-bash](18:14:43)[0](root) : /opt/hadoop
+### init namenode
+
+```
 $hdfs namenode -format
-
-mapred --daemon start historyserver
-
-for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
 
+### start or stop hadoop cluster
 Start:   
-```
+
+```bash
 for i in `seq 3 6`; do virsh start u$i; done
+sleep 60 # wait for 60 secs for servers to boot up
 ansible u3 -a "start-all.sh";
 ansible u3 -a "mapred --daemon start historyserver";
 ```
@@ -121,11 +122,6 @@ ansible u3 -a "mapred --daemon stop historyserver";
 ansible u3 -a "stop-all.sh";
 for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
-
-
-for i in `seq 1 7`; do
-ansible u$i -a "rm -f /etc/apt/sources.list.d/openjdk-r-ubuntu-ppa-artful.list*";
-done
 
 ## Spark
 
