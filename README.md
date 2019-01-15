@@ -136,7 +136,12 @@ I use this one:
 
 ![](img/build_spark.gif)
 
+
+Run Spark with Yarn:  
+![](img/hadoop.gif)
+
 REF: https://spark.apache.org/docs/latest/building-spark.html
+
 
 ## Beam
 
