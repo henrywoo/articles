@@ -151,6 +151,13 @@ I use this one:
 
 REF: https://spark.apache.org/docs/latest/building-spark.html
 
+## Beam
+
+
+
+
+## Flink
+
 
 
 
