@@ -23,12 +23,14 @@ In ubuntu, install kvm and virutal machine manager, the vm configs are stored he
 ```
 for i in `seq 1 7`; do virsh reboot u$i; sleep 60;done
 for i in `seq 1 7`; do virsh shutdown u$i; sleep 60;done
-for i in `seq 1 7`; do virsh start u$i; sleep 60;done
+for i in `seq 1 7`; do virsh start u$i;done
 
 for i in `seq 0 7`; do 
 ansible u$i -a "apt";
 done
 ```
+
+![](img/Selection_003.png)
 
 ```
 for i in `seq 0 7`; do
@@ -99,3 +101,10 @@ ansible u3 -a "mapred --daemon stop historyserver";
 ansible u3 -a "stop-all.sh";
 for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
+
+
+for i in `seq 1 7`; do
+ansible u$i -a "rm -f /etc/apt/sources.list.d/openjdk-r-ubuntu-ppa-artful.list*";
+done
+
+
