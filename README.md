@@ -18,7 +18,7 @@ In ubuntu, install kvm and virutal machine manager, the vm configs are stored he
 ```
 
 
-## Start all VMs
+## Start/Stop/Setup all VMs
 
 ```
 for i in `seq 1 7`; do virsh reboot u$i; sleep 60;done
@@ -34,20 +34,6 @@ done
 
 ```
 for i in `seq 0 7`; do
-ansible u$i -a "cp /etc/network/interfaces /opt/share/vmshare/etc/network/interfaces.$i.conf";
-done
-```
-for i in `seq 1 7`; do
-ansible u$i -a "rm -f /etc/network/interfaces";
-ansible u$i -a "cp /opt/share/vmshare/etc/network/interfaces.$i.conf /etc/network/interfaces";
-done
-
-for i in `seq 0 7`; do
-ansible u$i -a "ln -s /opt/share/vmshare/etc/network/interfaces.$i.conf /etc/network/interfaces.bk";
-ansible u$i -a "mv -f /etc/network/interfaces.bk /etc/network/interfaces";
-done
-
-for i in `seq 0 7`; do
 ansible u$i -a "ln -s /opt/share/vmshare/root/.bashrc /root/.bashrc.bk";
 ansible u$i -a "mv -f /root/.bashrc.bk /root/.bashrc";
 done
@@ -56,6 +42,7 @@ for i in `seq 0 7`; do
 ansible u$i -a "ln -s /opt/share/vmshare/etc/hosts /etc/hosts.bk";
 ansible u$i -a "mv -f /etc/hosts.bk /etc/hosts";
 done
+```
 
 
 
