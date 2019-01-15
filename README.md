@@ -143,6 +143,30 @@ Run Spark with Yarn:
 REF: https://spark.apache.org/docs/latest/building-spark.html
 
 
+```
+java.lang.IllegalArgumentException: Unrecognized Hadoop major version number: 3.1.1
+  at org.apache.hadoop.hive.shims.ShimLoader.getMajorVersion(ShimLoader.java:174)
+  at org.apache.hadoop.hive.shims.ShimLoader.loadShims(ShimLoader.java:139)
+  at org.apache.hadoop.hive.shims.ShimLoader.getHadoopShims(ShimLoader.java:100)
+  at org.apache.hadoop.hive.conf.HiveConf$ConfVars.<clinit>(HiveConf.java:368)
+  at org.apache.hadoop.hive.conf.HiveConf.<clinit>(HiveConf.java:105)
+  at java.lang.Class.forName0(Native Method)
+  at java.lang.Class.forName(Class.java:348)
+  at org.apache.spark.util.Utils$.classForName(Utils.scala:195)
+  at org.apache.spark.sql.SparkSession$.hiveClassesArePresent(SparkSession.scala:1116)
+  at org.apache.spark.repl.Main$.createSparkSession(Main.scala:102)
+  ... 57 elided
+<console>:14: error: not found: value spark
+       import spark.implicits._
+              ^
+<console>:14: error: not found: value spark
+       import spark.sql
+              ^
+```
+
+
+
+
 ## Beam
 
 
