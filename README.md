@@ -222,6 +222,41 @@ After running build:
 2019-01-15 22:49:05,733 INFO org.apache.hadoop.yarn.server.resourcemanager.RMAppManager$ApplicationSummary: appId=application_1547609798272_0001,name=Spark shell,user=root,queue=default,state=FINISHED,trackingUrl=http://u3:8088/proxy/application_1547609798272_0001/,appMasterHost=192.168.122.105,submitTime=1547610447422,startTime=1547610448573,finishTime=1547610545418,finalStatus=UNDEFINED,memorySeconds=96574,vcoreSeconds=94,preemptedMemorySeconds=0,preemptedVcoreSeconds=0,preemptedAMContainers=0,preemptedNonAMContainers=0,preemptedResources=<memory:0\, vCores:0>,applicationType=SPARK,resourceSeconds=96574 MB-seconds\, 94 vcore-seconds,preemptedResourceSeconds=0 MB-seconds\, 0 vcore-seconds
 ```
 
+Found this in data node log:
+
+```
+2019-01-15 23:10:35,348 WARN org.apache.hadoop.yarn.server.nodemanager.containermanager.monitor.ContainersMonitorImpl: Container [pid=2313,containerID=container_1547609798272_0002_01_000001] is running 15301120B beyond the 'VIRTUAL' memory limit. Current usage: 151.0 MB of 1 GB physical memory used; 2.1 GB of 2.1 GB virtual memory used. Killing container.
+Dump of the process-tree for container_1547609798272_0002_01_000001 :
+>.|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE
+>.|- 2313 2311 2313 2313 (bash) 0 1 21856256 874 /bin/bash -c /opt/share/software/jdk1.8.0_191/bin/java -server -Xmx512m -Djava.io.tmpdir=/opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/tmp -Dspark.yarn.app.container.log.dir=/opt/hadoop/log/userlogs/application_1547609798272_0002/container_1547609798272_0002_01_000001 org.apache.spark.deploy.yarn.ExecutorLauncher --arg '192.168.122.1:33869' --properties-file /opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/__spark_conf__/__spark_conf__.properties --dist-cache-conf /opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/__spark_conf__/__spark_dist_cache__.properties 1> /opt/hadoop/log/userlogs/application_1547609798272_0002/container_1547609798272_0002_01_000001/stdout 2> /opt/hadoop/log/userlogs/application_1547609798272_0002/container_1547609798272_0002_01_000001/stderr.
+>.|- 2322 2313 2313 2313 (java) 652 405 2248302592 37786 /opt/share/software/jdk1.8.0_191/bin/java -server -Xmx512m -Djava.io.tmpdir=/opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/tmp -Dspark.yarn.app.container.log.dir=/opt/hadoop/log/userlogs/application_1547609798272_0002/container_1547609798272_0002_01_000001 org.apache.spark.deploy.yarn.ExecutorLauncher --arg 192.168.122.1:33869 --properties-file /opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/__spark_conf__/__spark_conf__.properties --dist-cache-conf /opt/hadoop/tmp/nm-local-dir/usercache/root/appcache/application_1547609798272_0002/container_1547609798272_0002_01_000001/__spark_conf__/__spark_dist_cache__.properties.
+```
+
+REF:  
+https://stackoverflow.com/questions/51237116/understanding-spark-yarn-executor-memoryoverhead  
+https://stackoverflow.com/questions/49988475/why-increase-spark-yarn-executor-memoryoverhead  
+https://spark.apache.org/docs/latest/configuration.html  
+
+
+SPARK_LOCAL_IP=192.168.122.1 ./bin/spark-shell --master yarn --deploy-mode client --driver-memory 1G --executor-memory 1G --conf spark.executor.memoryOverhead=348
+
+
+https://mapr.com/blog/best-practices-yarn-resource-management/  
+https://blog.csdn.net/dai451954706/article/details/48828751  
+```
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+    </property>   
+```
+
+
+- upload file failed from webui
+
+found this in namenode log:
+```
+2019-01-15 23:21:35,253 INFO org.apache.hadoop.ipc.Server: IPC Server handler 2 on 9000, call Call#936 Retry#0 org.apache.hadoop.hdfs.protocol.ClientProtocol.create from 192.168.122.106:56178: org.apache.hadoop.security.AccessControlException: Permission denied: user=dr.who, access=WRITE, inode="/test":root:supergroup:drwxr-xr-x
+```
 
 ## Beam
 
