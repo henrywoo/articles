@@ -219,5 +219,16 @@ After running build:
 ## Flink
 
 
+## Others
 
+stop services from auto-start:
 
+```
+for i in `seq 3 6`; do
+ansible u$i -a "update-rc.d -f mysql remove";
+ansible u$i -a "update-rc.d -f nginx remove";
+ansible u$i -a "update-rc.d -f postgresql remove";
+done
+```
+
+REF: https://help.ubuntu.com/community/UbuntuBootupHowto
