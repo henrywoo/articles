@@ -261,6 +261,10 @@ found this in namenode log:
 ## Beam
 
 
+## Zookeeper
+
+in u3 running in port 2181
+
 ## HBase
 
 
