@@ -110,9 +110,11 @@ ansible u3 -a "stop-all.sh";
 for i in `seq 3 6`; do virsh shutdown u$i; done
 ```
 
-http://u3:8088/cluster  
+[http://u3:8088/cluster](http://u3:8088/cluster)  
 ![](img/hadoop.gif)
 
+[http://u3:9870/](http://u3:9870/)  
+![](img/Selection_004.png)
 
 ## Spark
 
@@ -164,8 +166,12 @@ java.lang.IllegalArgumentException: Unrecognized Hadoop major version number: 3.
               ^
 ```
 
+- Run spark
+
 ```
-SPARK_LOCAL_IP=192.168.122.1 ./bin/spark-shell --master yarn --deploy-mode client
+✔ /opt/share/git.repo/spark.git [henrywu {origin/henrywu}|✔] 
+20:07 # SPARK_LOCAL_IP=192.168.122.1 ./bin/spark-shell --master yarn --deploy-mode client
+...
 Failed to find Spark jars directory (/home/henry/share/git.repo/spark.git/assembly/target/scala-2.11/jars).
 You need to build Spark with the target "package" before running this program.
 ```
@@ -208,6 +214,12 @@ After running build:
 [INFO] Total time:  14:59 min
 [INFO] Finished at: 2019-01-15T16:48:36-08:00
 [INFO] ------------------------------------------------------------------------
+```
+
+### Troubleshooting
+
+```
+2019-01-15 22:49:05,733 INFO org.apache.hadoop.yarn.server.resourcemanager.RMAppManager$ApplicationSummary: appId=application_1547609798272_0001,name=Spark shell,user=root,queue=default,state=FINISHED,trackingUrl=http://u3:8088/proxy/application_1547609798272_0001/,appMasterHost=192.168.122.105,submitTime=1547610447422,startTime=1547610448573,finishTime=1547610545418,finalStatus=UNDEFINED,memorySeconds=96574,vcoreSeconds=94,preemptedMemorySeconds=0,preemptedVcoreSeconds=0,preemptedAMContainers=0,preemptedNonAMContainers=0,preemptedResources=<memory:0\, vCores:0>,applicationType=SPARK,resourceSeconds=96574 MB-seconds\, 94 vcore-seconds,preemptedResourceSeconds=0 MB-seconds\, 0 vcore-seconds
 ```
 
 
