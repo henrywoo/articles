@@ -165,7 +165,7 @@ java.lang.IllegalArgumentException: Unrecognized Hadoop major version number: 3.
 ```
 
 ```
-16:32 # ./bin/spark-shell --master yarn --deploy-mode client
+SPARK_LOCAL_IP=192.168.122.1 ./bin/spark-shell --master yarn --deploy-mode client
 Failed to find Spark jars directory (/home/henry/share/git.repo/spark.git/assembly/target/scala-2.11/jars).
 You need to build Spark with the target "package" before running this program.
 ```
