@@ -164,7 +164,51 @@ java.lang.IllegalArgumentException: Unrecognized Hadoop major version number: 3.
               ^
 ```
 
-
+```
+16:32 # ./bin/spark-shell --master yarn --deploy-mode client
+Failed to find Spark jars directory (/home/henry/share/git.repo/spark.git/assembly/target/scala-2.11/jars).
+You need to build Spark with the target "package" before running this program.
+```
+After running build:  
+```
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spark Project Parent POM 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] Spark Project Parent POM ........................... SUCCESS [  5.922 s]
+[INFO] Spark Project Tags ................................. SUCCESS [ 10.150 s]
+[INFO] Spark Project Sketch ............................... SUCCESS [  9.611 s]
+[INFO] Spark Project Local DB ............................. SUCCESS [  5.227 s]
+[INFO] Spark Project Networking ........................... SUCCESS [ 10.297 s]
+[INFO] Spark Project Shuffle Streaming Service ............ SUCCESS [ 11.854 s]
+[INFO] Spark Project Unsafe ............................... SUCCESS [ 11.983 s]
+[INFO] Spark Project Launcher ............................. SUCCESS [ 10.106 s]
+[INFO] Spark Project Core ................................. SUCCESS [03:37 min]
+[INFO] Spark Project ML Local Library ..................... SUCCESS [  7.181 s]
+[INFO] Spark Project GraphX ............................... SUCCESS [ 12.523 s]
+[INFO] Spark Project Streaming ............................ SUCCESS [ 31.369 s]
+[INFO] Spark Project Catalyst ............................. SUCCESS [01:46 min]
+[INFO] Spark Project SQL .................................. SUCCESS [03:21 min]
+[INFO] Spark Project ML Library ........................... SUCCESS [01:47 min]
+[INFO] Spark Project Tools ................................ SUCCESS [  0.577 s]
+[INFO] Spark Project Hive ................................. SUCCESS [ 43.242 s]
+[INFO] Spark Project REPL ................................. SUCCESS [  4.809 s]
+[INFO] Spark Project YARN Shuffle Service ................. SUCCESS [ 10.514 s]
+[INFO] Spark Project YARN ................................. SUCCESS [ 10.361 s]
+[INFO] Spark Project Mesos ................................ SUCCESS [  6.854 s]
+[INFO] Spark Project Kubernetes ........................... SUCCESS [  8.368 s]
+[INFO] Spark Project Assembly ............................. SUCCESS [  3.979 s]
+[INFO] Spark Integration for Kafka 0.10 ................... SUCCESS [  7.962 s]
+[INFO] Kafka 0.10+ Source for Structured Streaming ........ SUCCESS [ 11.423 s]
+[INFO] Spark Project Examples ............................. SUCCESS [ 16.907 s]
+[INFO] Spark Integration for Kafka 0.10 Assembly .......... SUCCESS [ 10.350 s]
+[INFO] Spark Avro ......................................... SUCCESS [  4.265 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14:59 min
+[INFO] Finished at: 2019-01-15T16:48:36-08:00
+[INFO] ------------------------------------------------------------------------
+```
 
 
 ## Beam
