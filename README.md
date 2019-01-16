@@ -129,12 +129,23 @@ For normal build this is fine:
 I use this one:
 ```
 ./build/mvn \
-  -Psparkr -Phive \
-  -Pkubernetes \
+  -Psparkr -Phive\
   -Phive-thriftserver -Pmesos -Pyarn \
+  -Pkubernetes \
   -Phadoop-3.1 -Dhadoop.version=3.1.1 \
   -DskipTests clean package
 ```
+hive seems not supporting hadoop 3, so remove it from the build command:
+```
+./build/mvn \
+  -Psparkr \
+  -Pmesos -Pyarn \
+  -Pkubernetes \
+  -Phadoop-3.1 -Dhadoop.version=3.1.1 \
+  -DskipTests clean package
+```
+
+
 
 ![](img/build_spark.gif)
 
@@ -250,6 +261,7 @@ https://blog.csdn.net/dai451954706/article/details/48828751
     </property>   
 ```
 
+![](img/run_spark.gif)
 
 - upload file failed from webui
 
