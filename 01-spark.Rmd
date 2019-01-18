@@ -111,3 +111,25 @@ Type :help for more information.
 scala> :q
 ```
 
+
+
+
+`SPARK_LOCAL_IP=192.168.122.1 spark-submit --master yarn --deploy-mode client src/python/WordCount.py`
+
+```
+07:24 # cat src/python/WordCount.py 
+import sys
+from pyspark import SparkContext
+if __name__ == "__main__":
+    #master = "local"
+    master = "yarn"
+    print(sys.argv)
+    if len(sys.argv) == 2:
+        master = sys.argv[1]
+    sc = SparkContext(master, "WordCount")
+    lines = sc.parallelize(["pandas", "i like pandas"])
+    result = lines.flatMap(lambda x: x.split(" ")).countByValue()
+    for key, value in result.iteritems():
+        print "%s %i" % (key, value)
+```
+
