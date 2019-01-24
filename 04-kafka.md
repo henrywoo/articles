@@ -207,6 +207,22 @@ fs_server_1
 └── replication-offset-checkpoint
 
 3 directories, 26 files
+✔ /opt/share/git.repo/kafka.git [henrywu {origin/henrywu}|✚ 1] 
+10:43 # file fs_server_0/*
+fs_server_0/cleaner-offset-checkpoint:        empty
+fs_server_0/docs-0:                           directory
+fs_server_0/log-start-offset-checkpoint:      ASCII text
+fs_server_0/meta.properties:                  ASCII text
+fs_server_0/recovery-point-offset-checkpoint: ASCII text
+fs_server_0/replication-offset-checkpoint:    ASCII text
+fs_server_0/stock-0:                          directory
+✔ /opt/share/git.repo/kafka.git [henrywu {origin/henrywu}|✚ 1] 
+10:45 # file fs_server_0/docs-0/*
+fs_server_0/docs-0/00000000000000000000.index:     data
+fs_server_0/docs-0/00000000000000000000.log:       data
+fs_server_0/docs-0/00000000000000000000.timeindex: data
+fs_server_0/docs-0/00000000000000000005.snapshot:  data
+fs_server_0/docs-0/leader-epoch-checkpoint:        ASCII text
 ```
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
