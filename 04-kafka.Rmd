@@ -4,3 +4,16 @@ arguments for kafka server, which you can override in command line:
 
 
 ![](img/Selection_014.png)
+
+
+![](img/Selection_005.png)
+
+![](img/Selection_006.png)
+
+![](img/Selection_007.png)
+
+![](img/Selection_008.png)
+
+![](img/Selection_012.png)
+
+![](img/Selection_013.png)
