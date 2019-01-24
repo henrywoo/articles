@@ -351,6 +351,10 @@ Prefectly reproduce duplicated message:
 
 ![](img/henrywu_002.png)
 
+dead consumer occupies resources:
+
+![](img/henrywu_003.png)
+
 
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
