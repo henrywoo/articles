@@ -171,5 +171,44 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 \
   --replication-factor 2 --partitions 2 --topic news
 ```
 
+```
+✔ /opt/share/git.repo/kafka.git [henrywu {origin/henrywu}|✚ 1] 
+10:39 # tree fs_server_*
+fs_server_0
+├── cleaner-offset-checkpoint
+├── docs-0
+│   ├── 00000000000000000000.index
+│   ├── 00000000000000000000.log
+│   ├── 00000000000000000000.timeindex
+│   ├── 00000000000000000005.snapshot
+│   └── leader-epoch-checkpoint
+├── log-start-offset-checkpoint
+├── meta.properties
+├── recovery-point-offset-checkpoint
+├── replication-offset-checkpoint
+└── stock-0
+    ├── 00000000000000000000.index
+    ├── 00000000000000000000.log
+    ├── 00000000000000000000.timeindex
+    ├── 00000000000000000001.snapshot
+    ├── 00000000000000000005.snapshot
+    ├── 00000000000000000009.snapshot
+    └── leader-epoch-checkpoint
+fs_server_1
+├── cleaner-offset-checkpoint
+├── log-start-offset-checkpoint
+├── meta.properties
+├── music-0
+│   ├── 00000000000000000000.index
+│   ├── 00000000000000000000.log
+│   ├── 00000000000000000000.timeindex
+│   └── leader-epoch-checkpoint
+├── recovery-point-offset-checkpoint
+└── replication-offset-checkpoint
+
+3 directories, 26 files
+```
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
+
+
