@@ -291,6 +291,15 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic docs
     docs - marked for deletion
 
 
+A brute force reset:
+
+    stop all brokers
+    stop zookeeper
+    and
+    rm -fr fs_server_*
+
+
+
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
 
