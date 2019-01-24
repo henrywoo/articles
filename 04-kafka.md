@@ -225,6 +225,20 @@ fs_server_0/docs-0/00000000000000000005.snapshot:  data
 fs_server_0/docs-0/leader-epoch-checkpoint:        ASCII text
 ```
 
+To send some message:
+```
+[11349][ubuntu][4][bash](10:41:14)[0](root) : /home/henry/share/software/kafka
+$bin/kafka-console-producer.sh --broker-list 192.168.122.1:9090 --topic docs
+>hello
+[2019-01-24 10:46:42,023] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {docs=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+>
+```
+
+delete topics:
+```
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic docs
+```
+
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
 
