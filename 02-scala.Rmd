@@ -1,0 +1,8 @@
+# Scala
+
+install sbt
+
+wget https://dl.bintray.com/sbt/debian/sbt-1.2.8.deb
+
+dpkg -i /opt/share/software/sbt-1.2.8.deb
+

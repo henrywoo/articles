@@ -1,0 +1,6 @@
+# kafka
+
+arguments for kafka server, which you can override in command line:
+
+
+![](img/Selection_014.png)
