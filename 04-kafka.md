@@ -351,9 +351,29 @@ Prefectly reproduce duplicated message:
 
 ![](img/henrywu_002.png)
 
-dead consumer occupies resources:
+dead consumer could hog resources:
 
 ![](img/henrywu_003.png)
+
+controller election:
+
+https://zookeeper.apache.org/doc/r3.4.0/zookeeperProgrammers.html#ch_zkWatches
+
+
+```
+[11469][ubuntu][1][bash](13:25:32)[0](root) : /home/henry/share/software/kafka
+$./bin/kafka-topics.sh --alter --zookeeper localhost:2181 --topic __consumer_offsets --partitions 4
+Error while executing topic command : The number of partitions for the offsets topic cannot be changed.
+[2019-01-24 14:50:41,504] ERROR java.lang.IllegalArgumentException: The number of partitions for the offsets topic cannot be changed.
+	at kafka.admin.TopicCommand$$anonfun$alterTopic$1.apply(TopicCommand.scala:145)
+	at kafka.admin.TopicCommand$$anonfun$alterTopic$1.apply(TopicCommand.scala:128)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at kafka.admin.TopicCommand$.alterTopic(TopicCommand.scala:128)
+	at kafka.admin.TopicCommand$.main(TopicCommand.scala:65)
+	at kafka.admin.TopicCommand.main(TopicCommand.scala)
+ (kafka.admin.TopicCommand$)
+```
 
 
 
