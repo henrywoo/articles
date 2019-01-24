@@ -110,9 +110,12 @@ Because IntelliJ cannot start two instances at the same time, I am using both In
 
 Broker id is tied with FS:
 ```
-[2019-01-23 20:18:16,381] ERROR Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer:159)
-kafka.common.InconsistentBrokerIdException: Configured broker.id 0 doesn't match stored broker.id 1 in meta.properties. 
-If you moved your data, make sure your configured broker.id matches. If you intend to create a new broker, you should 
+[2019-01-23 20:18:16,381] ERROR Fatal error during KafkaServer startup. 
+Prepare to shutdown (kafka.server.KafkaServer:159)
+kafka.common.InconsistentBrokerIdException: Configured broker.id 0 doesn't 
+match stored broker.id 1 in meta.properties. 
+If you moved your data, make sure your configured broker.id matches. If you 
+intend to create a new broker, you should 
 remove all data in your data directories (log.dirs).
 	at kafka.server.KafkaServer.getBrokerIdAndOfflineDirs(KafkaServer.scala:710)
 	at kafka.server.KafkaServer.startup(KafkaServer.scala:212)
@@ -126,31 +129,12 @@ I have to remove all files:
 rm -f fs_server_*
 ```
 
-
-
-
-
-
 launch parameters:
 
 
 ```
 [-daemon] server.properties [--override property=value]*
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ![](img/Selection_005.png)
