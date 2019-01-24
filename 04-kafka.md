@@ -298,6 +298,9 @@ A brute force reset:
     and
     rm -fr fs_server_*
 
+You still can see it in zookeeper though marked for deletion.
+
+![](img/henrywu_001.png)
 
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
