@@ -379,6 +379,10 @@ When partition is more than consumer:
 
 ![](img/kafka_partition_more.gif)
 
+partition can only be increased:
+
+![](img/kafka_incr_part.gif)
+
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
 
