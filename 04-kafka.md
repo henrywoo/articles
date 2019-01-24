@@ -234,10 +234,62 @@ $bin/kafka-console-producer.sh --broker-list 192.168.122.1:9090 --topic docs
 >
 ```
 
+
+
+
+```
+✔ /opt/share/git.repo/kafka.git [henrywu {origin/henrywu}|✚ 1] 
+11:00 # tree fs_server_*
+fs_server_0
+├── cleaner-offset-checkpoint
+├── docs-0
+│   ├── 00000000000000000000.index
+│   ├── 00000000000000000000.log
+│   ├── 00000000000000000000.timeindex
+│   ├── 00000000000000000005.snapshot
+│   └── leader-epoch-checkpoint
+├── log-start-offset-checkpoint
+├── meta.properties
+├── recovery-point-offset-checkpoint
+├── replication-offset-checkpoint
+└── stock-0
+    ├── 00000000000000000000.index
+    ├── 00000000000000000000.log
+    ├── 00000000000000000000.timeindex
+    ├── 00000000000000000001.snapshot
+    ├── 00000000000000000005.snapshot
+    ├── 00000000000000000009.snapshot
+    └── leader-epoch-checkpoint
+fs_server_1
+├── cleaner-offset-checkpoint
+├── docs-0
+│   ├── 00000000000000000000.index
+│   ├── 00000000000000000000.log
+│   ├── 00000000000000000000.timeindex
+│   └── leader-epoch-checkpoint
+├── log-start-offset-checkpoint
+├── meta.properties
+├── music-0
+│   ├── 00000000000000000000.index
+│   ├── 00000000000000000000.log
+│   ├── 00000000000000000000.timeindex
+│   └── leader-epoch-checkpoint
+├── recovery-point-offset-checkpoint
+└── replication-offset-checkpoint
+
+4 directories, 30 files
+```
+
 delete topics:
 ```
 bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic docs
 ```
+
+    [11395][ubuntu][7][bash](11:56:22)[0](root) : /opt/share/software/kafka
+    $./bin/kafka-topics.sh --list --zookeeper localhost:2181
+    __consumer_offsets
+    docs - marked for deletion
+
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
