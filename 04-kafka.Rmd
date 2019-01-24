@@ -1,9 +1,6 @@
 # kafka
 
-arguments for kafka server, which you can override in command line:
 
-
-![](img/Selection_014.png)
 
 
 ![](img/Selection_005.png)
@@ -14,6 +11,28 @@ arguments for kafka server, which you can override in command line:
 
 ![](img/Selection_008.png)
 
+---
+
+![](img/Workspace_1_009.png)
+![](img/Workspace_1_010.png)
+![](img/Workspace_1_011.png)
+
+
+![](img/Selection_012.png)
+
 ![](img/Selection_012.png)
 
 ![](img/Selection_013.png)
+
+
+arguments for kafka server, which you can override in command line:
+
+
+![](img/Selection_014.png)
+
+Create topics:
+
+```
+bin/kafka-topics.sh --create --zookeeper localhost:2181 \
+  --replication-factor 2 --partitions 2 --topic news
+```
