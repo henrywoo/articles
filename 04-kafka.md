@@ -58,19 +58,26 @@ It is ok to use old client to connect to new server:
 
 ```rust
 [11034][ubuntu][5][bash](15:24:19)[0](root) : /home/henry/share/software/kafka
-$./bin/kafka-topics.sh --list --zookeeper localhost:2181
+$./bin/kafka-topics.sh --list \
+--zookeeper localhost:2181
 news
 [11035][ubuntu][5][bash](15:35:25)[0](root) : /home/henry/share/software/kafka
-$./bin/kafka-topics.sh --create --zookeeper localhost:2181   --replication-factor 2 --partitions 2 --topic news2
-Error while executing topic command : Replication factor: 2 larger than available brokers: 1.
-[2019-01-23 15:35:44,814] ERROR org.apache.kafka.common.errors.InvalidReplicationFactorException: Replication factor: 2 larger than available brokers: 1.
+$./bin/kafka-topics.sh --create --zookeeper localhost:2181  \
+ --replication-factor 2 --partitions 2 --topic news2
+Error while executing topic command : Replication factor: 2 larger than 
+available brokers: 1.
+[2019-01-23 15:35:44,814] ERROR org.apache.kafka.common.errors.InvalidReplicationFactorException:
+ Replication factor: 2 larger than available brokers: 1.
  (kafka.admin.TopicCommand$)
 ```
 
 But you cannot run different version's broker at the same time:
 ```rust
-[2019-01-23 15:11:50,987] ERROR Exception while processing request from 192.168.122.1:9093-192.168.122.1:51536-20 (kafka.network.Processor)
-org.apache.kafka.common.errors.InvalidRequestException: Error getting request for apiKey: UPDATE_METADATA, apiVersion: 5, connectionId: 192.168.122.1:9093-192.168.122.1:51536-20, listenerName: ListenerName(PLAINTEXT), principal: User:ANONYMOUS
+[2019-01-23 15:11:50,987] ERROR Exception while processing request from 
+192.168.122.1:9093-192.168.122.1:51536-20 (kafka.network.Processor)
+org.apache.kafka.common.errors.InvalidRequestException: Error getting request for apiKey: 
+UPDATE_METADATA, apiVersion: 5, connectionId: 192.168.122.1:9093-192.168.122.1:51536-20, 
+listenerName: ListenerName(PLAINTEXT), principal: User:ANONYMOUS
 Caused by: java.lang.IllegalArgumentException: Invalid version for API key UPDATE_METADATA: 5
 	at org.apache.kafka.common.protocol.ApiKeys.schemaFor(ApiKeys.java:312)
 	at org.apache.kafka.common.protocol.ApiKeys.requestSchema(ApiKeys.java:282)
