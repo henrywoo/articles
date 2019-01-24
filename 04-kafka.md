@@ -375,7 +375,9 @@ Error while executing topic command : The number of partitions for the offsets t
  (kafka.admin.TopicCommand$)
 ```
 
+When partition is more than consumer:
 
+![](img/kafka_partition_more.gif)
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
