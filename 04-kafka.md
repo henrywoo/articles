@@ -379,9 +379,16 @@ When partition is more than consumer:
 
 ![](img/kafka_partition_more.gif)
 
-partition can only be increased:
+Partition number can only be increased:
 
 ![](img/kafka_incr_part.gif)
+
+kafka shutdown:  
+![](img/henrywu_004.png)
+
+two kafka brokers are running:  
+![](img/henrywu_005.png)
+
 
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
