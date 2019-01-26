@@ -393,3 +393,7 @@ two kafka brokers are running:
 https://www.linuxjournal.com/content/watermarking-images-command-line
 
 
+```
+[11707][ubuntu][4][bash](17:59:05)[0](root) : ~/.doverfs
+$watch -n 1 'tree -s'
+```

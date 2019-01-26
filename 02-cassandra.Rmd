@@ -1,3 +1,51 @@
-# Literature
+# Cassandra
 
-Here is a review of existing methods.
+
+at uu:
+
+```
+[12108][uu][0][bash](15:10:39)[0](root) : /home/henry/share/git.repo/cassandra.git
+$cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf/cassandra.uu.yaml
+```
+
+at u0:
+
+```
+[12108][u0][0][bash](15:10:39)[0](root) : /home/henry/share/git.repo/cassandra.git
+$cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf/cassandra.u0.yaml
+```
+
+at u1:
+```
+[12108][u1][0][bash](15:10:39)[0](root) : /home/henry/share/git.repo/cassandra.git
+$cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf/cassandra.u1.yaml
+```
+
+Check status:
+
+```
+$nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  192.168.122.1    341.26 KiB  256          31.9%             b7b67fc9-a6db-4ad8-a502-550ae6bc024e  rack1
+UN  192.168.122.100  349.42 KiB  256          36.1%             3e3487b9-f9c0-4de3-a38b-f7ca68839663  rack1
+UN  192.168.122.101  199.64 KiB  256          32.0%             07c0099b-52ef-4f45-8807-716421a4ae57  rack1
+```
+
+```
+15:40 # /opt/share/git.repo/cassandra.git/bin/cqlsh uu
+Connected to HenryCluster at uu:9042.
+[cqlsh 5.0.1 | Cassandra 4.0-SNAPSHOT | CQL spec 3.4.5 | Native protocol v4]
+Use HELP for help.
+cqlsh> SELECT peer, data_center, host_id,preferred_ip,rack,release_version,rpc_address,schema_version FROM system.peers;
+
+ peer            | data_center | host_id                              | preferred_ip | rack  | release_version | rpc_address     | schema_version
+-----------------+-------------+--------------------------------------+--------------+-------+-----------------+-----------------+--------------------------------------
+ 192.168.122.101 | datacenter1 | 07c0099b-52ef-4f45-8807-716421a4ae57 |         null | rack1 |    4.0-SNAPSHOT | 192.168.122.101 | c5ba4676-dd8d-3b6d-b26f-372c5444986b
+ 192.168.122.100 | datacenter1 | 3e3487b9-f9c0-4de3-a38b-f7ca68839663 |         null | rack1 |    4.0-SNAPSHOT | 192.168.122.100 | c5ba4676-dd8d-3b6d-b26f-372c5444986b
+
+(2 rows)
+```
