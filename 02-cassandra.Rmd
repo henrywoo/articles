@@ -1,5 +1,11 @@
 # Cassandra
 
+## Cluster setup
+
+Three nodes: uu, u0(seed), u1
+
+debug at `uu`
+
 
 at uu:
 
