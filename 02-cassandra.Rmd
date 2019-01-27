@@ -55,3 +55,99 @@ cqlsh> SELECT peer, data_center, host_id,preferred_ip,rack,release_version,rpc_a
 
 (2 rows)
 ```
+
+## Tests
+
+- stop uu's cassandra and query
+
+![](img/henrywu_009.png)
+
+it seems the node is still in system.peers table. but my query failed.
+
+check log in u0:
+```
+INFO  [GossipStage:1] 2019-01-26 18:44:51,135 Gossiper.java:1125 - InetAddress 192.168.122.1:7000 is now DOWN
+```
+
+Check with nodetool:
+
+```
+$nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
+DN  192.168.122.1    341.26 KiB  256          31.9%             b7b67fc9-a6db-4ad8-a502-550ae6bc024e  rack1
+UN  192.168.122.100  349.42 KiB  256          36.1%             3e3487b9-f9c0-4de3-a38b-f7ca68839663  rack1
+UN  192.168.122.101  199.64 KiB  256          32.0%             07c0099b-52ef-4f45-8807-716421a4ae57  rack1
+```
+
+Start ide, VM options:
+
+change 
+```
+-Dcassandra-foreground=yes
+-Dcassandra.config=file:///opt/share/git.repo/cassandra.git/conf/cassandra.uu.yaml
+-Dcassandra.storagedir=/opt/share/git.repo/cassandra.git/data
+-Dlogback.configurationFile=file:///opt/share/git.repo/cassandra.git/conf/logback.xml
+-Dcassandra.logdir=/opt/share/git.repo/cassandra.git/data/logs
+-ea
+-Xmx1G
+```
+
+to 
+
+```
+-Dcassandra-foreground=yes
+-Dcassandra.config=file:///opt/share/git.repo/cassandra.git/conf/cassandra.uu.yaml
+-ea
+-Xmx1G
+```
+
+![](img/henrywu_010.png)
+
+
+connect to `cqlsh`:
+
+```
+/opt/share/git.repo/cassandra.git/bin/cqlsh u0
+```
+
+
+Cassandra inter-node ports
+```
+Port number.	Description
+7000	Cassandra inter-node cluster communication.
+7001	Cassandra SSL inter-node cluster communication.
+7199	Cassandra JMX monitoring port.
+```
+
+Cassandra client ports
+
+```
+Port number.	Description
+9042	Cassandra client port.
+9160	Cassandra client port (Thrift).
+9142	Default for native_transport_port_ssl, useful when both encrypted and unencrypted connections are required
+```
+
+![](img/cass_heartbeat_gossip.gif)
+
+
+Create a keyspace named `s` with replication factor equal to 2.
+
+```
+create keyspace s with replication ={'class':'SimpleStrategy','replication_factor':2};
+```
+
+
+Change replication factor:
+```
+cqlsh:s> select * from words order by word;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="ORDER BY is only supported when the partition key is restricted by an EQ or an IN."
+cqlsh:s> ALTER KEYSPACE "s" WITH REPLICATION =  { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+
+Warnings :
+When increasing replication factor you need to run a full (-full) repair to distribute the data.
+```
