@@ -1,11 +1,20 @@
 # Cassandra
 
+`sss 2`
+
 ## Cluster setup
 
-Three nodes: uu, u0(seed), u1
+Start virtual machines:
+
+```
+for i in `seq 0 1`; do virsh start u$i; done
+```
+
+Three nodes: `uu`, `u0`(seed), `u1`
 
 debug at `uu`
 
+Log into virtual machines and start cassandra command in foreground:
 
 at uu:
 
@@ -17,12 +26,20 @@ $cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf
 at u0:
 
 ```
+ssh u0
 [12108][u0][0][bash](15:10:39)[0](root) : /home/henry/share/git.repo/cassandra.git
 $cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf/cassandra.u0.yaml
 ```
 
+Some warnings:
+```
+WARN  [main] 2019-01-28 10:08:28,234 SigarLibrary.java:174 - Cassandra server running in degraded mode. Is swap disabled? : false,  Address space adequate? : true,  nofile limit adequate? : true, nproc limit adequate? : false 
+WARN  [main] 2019-01-28 10:08:28,266 StartupChecks.java:310 - Maximum number of memory map areas per process (vm.max_map_count) 65530 is too low, recommended value: 1048575, you can change it with sysctl.
+```
+
 at u1:
 ```
+ssh u1
 [12108][u1][0][bash](15:10:39)[0](root) : /home/henry/share/git.repo/cassandra.git
 $cassandra -Rf -Dcassandra.config=file:////opt/share/git.repo/cassandra.git/conf/cassandra.u1.yaml
 ```
@@ -151,3 +168,98 @@ cqlsh:s> ALTER KEYSPACE "s" WITH REPLICATION =  { 'class' : 'SimpleStrategy', 'r
 Warnings :
 When increasing replication factor you need to run a full (-full) repair to distribute the data.
 ```
+
+`nodetool repair -full`
+
+
+
+## Write path
+
+StorageProxy(org/apache/cassandra/service/StorageProxy.java) gets the nodes responsible for replicas of the keys from the **ReplicationStrategy**, then sends RowMutation messages to them.
+
+If nodes are changing position on the ring, "pending ranges" are associated with their destinations in `TokenMetadata` and these are also written to.
+
+~~ConsistencyLevel determines how many replies to wait for. See WriteResponseHandler.determineBlockFor. Interaction with pending ranges is a bit tricky; see https://issues.apache.org/jira/browse/CASSANDRA-833~~
+
+If the **FailureDetector**(org/apache/cassandra/gms/FailureDetector.java) says that we don't have enough nodes alive to satisfy the ConsistencyLevel, we fail the request with UnavailableException
+
+When performing __atomic batches__, the mutations are written to the batchlog on two live nodes in the local datacenter. If the local datacenter contains multiple racks, the nodes will be chosen from two separate racks that are different from the coordinator's rack, when possible. If only one other node is alive, it alone will be used, but if no other nodes are alive, an UnavailableException will be returned unless the consistency level is ANY. If the cluster has only one node, it will write the batchlog entry itself. ~~The batchlog is contained in the `system.batchlog` table.~~
+
+If the **FailureDetector** gives us the okay but writes time out anyway because of a failure after the request is sent or because of an overload scenario, **StorageProxy** will write a "hint" locally to replay the write when the replica(s) timing out recover. This is called __HintedHandoff__. Note that HH does not prevent inconsistency entirely; either unclean shutdown or hardware failure can prevent the coordinating node from writing or replaying the hint. ArchitectureAntiEntropy is responsible for restoring consistency more completely.
+
+Cross-datacenter writes are not sent directly to each replica; instead, they are sent to a single replica with a parameter in MessageOut telling that replica to forward to the other replicas in that datacenter; those replicas will respond diectly to the **original** coordinator. 
+
+
+
+
+
+REF:
+
+http://cassandra.apache.org/blog/2018/12/03/introducing-transient-replication.html
+
+http://cassandra.apache.org/blog/2018/08/07/faster_streaming_in_cassandra.html
+
+https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
+
+https://issues.apache.org/jira/projects/CASSANDRA/issues/CASSANDRA-14404
+
+
+https://medium.com/jorgeacetozi/cassandra-architecture-and-write-path-anatomy-51e339bcfe0c
+![](https://cdn-images-1.medium.com/max/2000/0*WQ2Rwq2zltznUgIv.png)
+
+
+```
+    public static void sendToHintedReplicas(final Mutation mutation,
+                                            ReplicaPlan.ForTokenWrite plan,
+                                            AbstractWriteResponseHandler<IMutation> responseHandler,
+                                            String localDataCenter,
+                                            Stage stage)
+    throws OverloadedException
+    {
+```
+
+heavily called functions:
+
+```
+    public void sendOneWay(MessageOut message, int id, InetAddressAndPort to)
+    {
+        if (logger.isTraceEnabled())
+            logger.trace("{} sending {} to {}@{}", FBUtilities.getBroadcastAddressAndPort(), message.verb, id, to);
+
+        if (to.equals(FBUtilities.getBroadcastAddressAndPort()))
+            logger.trace("Message-to-self {} going over MessagingService", message);
+
+        // message sinks are a testing hook
+        for (IMessageSink ms : messageSinks)
+            if (!ms.allowOutgoingMessage(message, id, to))
+                return;
+
+        OutboundMessagingPool outboundMessagingPool = getMessagingConnection(to);
+        if (outboundMessagingPool != null)
+            outboundMessagingPool.sendMessage(message, id);
+    }
+
+...
+    public void receive(MessageIn message, int id)
+    {
+        TraceState state = Tracing.instance.initializeFromMessage(message);
+        if (state != null)
+            state.trace("{} message received from {}", message.verb, message.from);
+
+        // message sinks are a testing hook
+        for (IMessageSink ms : messageSinks)
+            if (!ms.allowIncomingMessage(message, id))
+                return;
+
+        Runnable runnable = new MessageDeliveryTask(message, id);
+        LocalAwareExecutorService stage = StageManager.getStage(message.getMessageType());
+        assert stage != null : "No stage for message type " + message.verb;
+
+        stage.execute(runnable, ExecutorLocals.create(state));
+    }
+```
+
+![](img/henrywu_013.png)
+
+
+![](img/henrywu_014.png)

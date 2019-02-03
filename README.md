@@ -116,6 +116,22 @@ for i in `seq 3 6`; do virsh shutdown u$i; done
 [http://u3:9870/](http://u3:9870/)  
 ![](img/Selection_004.png)
 
+
+### Hadoop streaming
+
+```
+$find /opt/share/software/HadoopEcosystem/hadoop-3.1.1/ -name hadoop-streaming*.jar
+/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/lib/hadoop-streaming-3.1.1.jar
+/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/sources/hadoop-streaming-3.1.1-sources.jar
+/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/sources/hadoop-streaming-3.1.1-test-sources.jar
+```
+
+```
+HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/lib/hadoop-streaming-3.1.1.jar
+yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /data/wiki/en_articles \
+  -output wc-mr
+```
+
 ## Spark
 
 Build from source since I could not find spark for hadoop 3.1.1
