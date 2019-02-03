@@ -129,7 +129,7 @@ $find /opt/share/software/HadoopEcosystem/hadoop-3.1.1/ -name hadoop-streaming*.
 ```
 hdfs dfs -rm -r wc_mr
 export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.1.1.jar
-yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /data/wiki/en_articles \
+yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /root/articles \
   -output wc-mr
 ```
 
