@@ -49,7 +49,7 @@ done
 ## Hadoop
 
 ```
-13:09 # ll /opt/share/software/HadoopEcosystem/hadoop-3.1.1/
+13:09 # ll /opt/share/software/HadoopEcosystem/hadoop/
 total 212
 drwxr-xr-x 10 libvirt-qemu henry   4096 Jan  9 16:14 ./
 drwxrwxr-x 14 libvirt-qemu henry   4096 Jan 15 04:28 ../
@@ -120,17 +120,16 @@ for i in `seq 3 6`; do virsh shutdown u$i; done
 ### Hadoop streaming
 
 ```
-$find /opt/share/software/HadoopEcosystem/hadoop-3.1.1/ -name hadoop-streaming*.jar
-/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/lib/hadoop-streaming-3.1.1.jar
-/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/sources/hadoop-streaming-3.1.1-sources.jar
-/opt/share/software/HadoopEcosystem/hadoop-3.1.1/share/hadoop/tools/sources/hadoop-streaming-3.1.1-test-sources.jar
+$find /opt/share/software/HadoopEcosystem/hadoop/ -name hadoop-streaming*.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-sources.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-test-sources.jar
 ```
 
 ```
 hdfs dfs -rm -r wc_mr
-export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.1.1.jar
-yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /root/articles \
-  -output wc-mr
+export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming.jar
+yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /test -output wc-mr
 ```
 
 ## Spark
