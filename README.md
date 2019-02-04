@@ -121,16 +121,20 @@ for i in `seq 3 6`; do virsh shutdown u$i; done
 
 ```
 $find /opt/share/software/HadoopEcosystem/hadoop/ -name hadoop-streaming*.jar
-/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming.jar
-/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-sources.jar
-/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-test-sources.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-3.2.0-sources.jar
+/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-3.2.0-test-sources.jar
 ```
 
 ```
 hdfs dfs -rm -r wc_mr
-export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming.jar
+export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar
 yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /test -output wc-mr
 ```
+
+### upgrade hadoop from 3.1.1 to 3.2.0
+
+download tar ball of hadoop3.2.0 from apache. Setup all config files. and run `start-all.sh`.
 
 ## Spark
 
