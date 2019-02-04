@@ -3,7 +3,7 @@
 
 ## Goal
 
-![](img/Selection_002.png)
+![](img/henrywu_015.png)
 
 ## Machines
 
