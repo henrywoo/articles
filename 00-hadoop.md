@@ -45,6 +45,7 @@ ansible u3 -a "mkdir -p /opt/hadoop/name";
 ### init namenode
 
 ```
+ssh u3
 $hdfs namenode -format
 ```
 
