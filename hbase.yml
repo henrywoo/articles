@@ -6,6 +6,7 @@
       state: directory
     with_items:
       - '/opt/zk'
+      - '/opt/zk/data'
       - '/opt/zk/hbase'
       - '/opt/hadoop/hbase/tmp'
       - '/opt/hadoop/hbase/local'
