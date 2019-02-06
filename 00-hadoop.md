@@ -195,6 +195,10 @@ Example: $HSTREAMING -mapper "/usr/local/bin/perl5 filter.pl"
   daily logs for days in month 2006-04
 ```
 
+- mapreduce.job.output.key.comparator.class
+
+https://hadoop.apache.org/docs/current/hadoop-streaming/HadoopStreaming.html#Hadoop_Comparator_Class
+
 ### upgrade hadoop from 3.1.1 to 3.2.0
 
 download tar ball of hadoop3.2.0 from apache. Setup all config files. and run `start-all.sh`.
