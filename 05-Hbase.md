@@ -1,5 +1,7 @@
 # HBase
 
+https://issues.apache.org/jira/projects/HBASE/issues/HBASE-21843?filter=allopenissues
+
 ## local mode
 
 ## cluster mode
