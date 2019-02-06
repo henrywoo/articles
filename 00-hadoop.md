@@ -60,7 +60,7 @@ ansible u3 -a "mapred --daemon start historyserver";
 ```
 
 Stop:  
-```
+```bash
 ansible u3 -a "mapred --daemon stop historyserver";
 ansible u3 -a "stop-all.sh";
 for i in `seq 3 6`; do virsh shutdown u$i; done
@@ -75,21 +75,22 @@ for i in `seq 3 6`; do virsh shutdown u$i; done
 
 ### Hadoop streaming
 
-```
+```bash
 $find /opt/share/software/HadoopEcosystem/hadoop/ -name hadoop-streaming*.jar
 /opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar
 /opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-3.2.0-sources.jar
 /opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/sources/hadoop-streaming-3.2.0-test-sources.jar
 ```
 
-```
+```bash
 hdfs dfs -rm -r wc-mr
 export HADOOP_STREAMING_JAR=/opt/share/software/HadoopEcosystem/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.0.jar
 yarn jar $HADOOP_STREAMING_JAR -mapper 'wc -l' -numReduceTasks 0 -input /henry -output wc-mr
 ```
 
 Details:
-```
+
+```bash
 $yarn jar $HADOOP_STREAMING_JAR -info
 Usage: $HADOOP_HOME/bin/hadoop jar hadoop-streaming.jar [options]
 Options:
