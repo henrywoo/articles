@@ -199,6 +199,56 @@ Example: $HSTREAMING -mapper "/usr/local/bin/perl5 filter.pl"
 
 https://hadoop.apache.org/docs/current/hadoop-streaming/HadoopStreaming.html#Hadoop_Comparator_Class
 
+
+
+```bash
+yarn jar $HADOOP_STREAMING_JAR -mapper 'cat' -reducer cat -input \
+    hdfs://u3:9000/henry/compare_test.txt -output /tmp/compare_test
+```
+
+
+```bash
+hdfs dfs -rm -r /tmp/compare_test
+yarn jar $HADOOP_STREAMING_JAR -mapper 'cat' -reducer cat -input \
+    hdfs://u3:9000/henry/compare_test.txt -output /tmp/compare_test \
+    -jobconf mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+    -jobconf stream.num.map.output.key.fields=4 \
+    -jobconf stream.map.output.field.separator=. \
+    -jobconf map.output.key.field.separator=. \
+    -jobconf mapred.text.key.comparator.options="-k3,3 -k4nr"
+hdfs dfs -cat /tmp/compare_test/part-00000
+
+hdfs dfs -rm -r /tmp/compare_test
+yarn jar $HADOOP_STREAMING_JAR -mapper 'cat' -reducer cat -input \
+    hdfs://u3:9000/henry/compare_test.txt -output /tmp/compare_test \
+    -jobconf mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+    -jobconf stream.num.map.output.key.fields=4 \
+    -jobconf stream.map.output.field.separator=. \
+    -jobconf map.output.key.field.separator=. \
+    -jobconf mapred.text.key.comparator.options="-k3,3 -k4,4"
+hdfs dfs -cat /tmp/compare_test/part-00000
+
+hdfs dfs -rm -r /tmp/compare_test
+yarn jar $HADOOP_STREAMING_JAR -mapper 'cat' -reducer cat -input \
+    hdfs://u3:9000/henry/compare_test.txt -output /tmp/compare_test \
+    -jobconf mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+    -jobconf stream.num.map.output.key.fields=4 \
+    -jobconf stream.map.output.field.separator=. \
+    -jobconf map.output.key.field.separator=. \
+    -jobconf mapred.text.key.comparator.options="-k4,4"
+hdfs dfs -cat /tmp/compare_test/part-00000
+
+e.5.9.22	
+d.1.5.23	
+e.5.1.23	
+f.8.3.3	
+e.5.1.45	
+e.9.4.5	
+a.7.2.6	
+
+```
+
+
 ### upgrade hadoop from 3.1.1 to 3.2.0
 
 download tar ball of hadoop3.2.0 from apache. Setup all config files. and run `start-all.sh`.
