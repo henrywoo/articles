@@ -1,0 +1,14 @@
+- hosts: hbase
+  tasks:
+  - name: ansible create multiple directory example
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - '/opt/zk'
+      - '/opt/zk/hbase'
+      - '/opt/hadoop/hbase/tmp'
+      - '/opt/hadoop/hbase/local'
+      - '/opt/hadoop/hbase/logs'
+
+
