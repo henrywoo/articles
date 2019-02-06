@@ -6,26 +6,7 @@
 
 Folder setup:
 ```
-# in uu master
-mkdir -p /opt/zk
-mkdir -p /opt/hadoop/hbase/zk
-mkdir -p /opt/hadoop/hbase/tmp
-mkdir -p /opt/hadoop/hbase/local
-mkdir -p /opt/hadoop/hbase/logs
-# in region server
-for i in `seq 3 6`; do
-ansible u$i -a "mkdir -p /opt/zk"; # zookeeper
-ansible u$i -a "mkdir -p /opt/hadoop/hbase/zk"; # hbase.zookeeper.property.dataDir
-ansible u$i -a "mkdir -p /opt/hadoop/hbase/tmp"; # hbase.tmp.dir
-ansible u$i -a "mkdir -p /opt/hadoop/hbase/local"; # hbase.local.dir
-ansible u$i -a "mkdir -p /opt/hadoop/hbase/logs"; # hbase.log.dir
-done
-```
-
-- Start Zookeeper
-
-```
-ansible u3 -a "zkServer.sh start"
+ansible-playbook hbase.yml
 ```
 
 - Start hbase
