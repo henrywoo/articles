@@ -263,7 +263,52 @@ e.5.9.22
 d.1.5.23	
 e.5.1.23	
 e.5.1.45	
+
+hdfs dfs -rm -r /tmp/wk_test 
+yarn jar $HADOOP_STREAMING_JAR -mapper 'python mapper.py' -reducer "python reducer.py" -input \
+    hdfs://u3:9000/henry/wikipedia.txt -output /tmp/wk_test \
+    -jobconf mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+    -jobconf mapred.text.key.comparator.options="-k2,2nr" > /dev/null
+hdfs dfs -cat /tmp/wk_test/part-00000 | head
+
+hdfs dfs -rm -r /tmp/wk_test 
+yarn jar $HADOOP_STREAMING_JAR \
+  -D mapred.jab.name="Streaming wordCount" \
+  -D mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+  -D mapred.text.key.comparator.options="-k2,2nr" \
+  -files mapper.py,reducer.py \
+  -mapper 'python mapper.py' \
+  -reducer "python reducer.py" \
+  -input hdfs://u3:9000/henry/wikipedia.txt \
+  -output /tmp/wk_test > /dev/null
+
+hdfs dfs -rm -r /tmp/wk_test 
+yarn jar $HADOOP_STREAMING_JAR \
+  -D mapred.jab.name="Streaming wordCount" \
+  -D mapreduce.job.output.key.comparator.class=org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator \
+  -D stream.map.output.field.separator=. \
+  -D stream.num.map.output.key.fields=2 \
+  -D mapreduce.map.output.key.field.separator="\\t" \
+  -D mapreduce.partition.keycomparator.options=-k2,2nr \
+  -D mapreduce.job.reduces=1 \
+  -files mapper.py,reducer.py \
+  -mapper 'python mapper.py' \
+  -reducer "python reducer.py" \
+  -input hdfs://u3:9000/henry/wikipedia.txt \
+  -output /tmp/wk_test > /dev/null
+
+hdfs dfs -rm -r /tmp/wk_test 
+yarn jar $HADOOP_STREAMING_JAR \
+  -D mapred.jab.name="Streaming wordCount" \
+  -files mapper.py,reducer.py \
+  -mapper 'python mapper.py' \
+  -reducer "python reducer.py" \
+  -input hdfs://u3:9000/henry/wikipedia.txt \
+  -output /tmp/wk_test > /dev/null
+
 ```
+
+
 
 
 ### upgrade hadoop from 3.1.1 to 3.2.0
