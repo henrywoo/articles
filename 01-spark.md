@@ -288,3 +288,34 @@ if __name__ == "__main__":
         print "%s %i" % (key, value)
 ```
 
+
+
+```
+[14238][uu][5][bash](14:54:13)[0](root) : ~/articles
+$export PYSPARK_DRIVER_PYTHON='ipython'
+[14239][uu][5][bash](14:54:37)[0](root) : ~/articles
+$SPARK_LOCAL_IP=192.168.122.1 pyspark --master yarn --deploy-mode client
+Python 2.7.15rc1 (default, Nov 12 2018, 14:31:15) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.5.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+2019-02-07 14:54:43 WARN  NativeCodeLoader:60 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+2019-02-07 14:54:47 WARN  Client:70 - Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.0.0-SNAPSHOT
+      /_/
+
+Using Python version 2.7.15rc1 (default, Nov 12 2018 14:31:15)
+SparkSession available as 'spark'.
+
+In [1]: 
+```
