@@ -3,12 +3,8 @@
 https://cwiki.apache.org/confluence/display/Hive
 https://cwiki.apache.org/confluence/display/Hive/Streaming+Data+Ingest
 
-Download data from kaggle and then upload to hdfs:
 
-```bash
-[14560][uu][1][bash](08:43:11)[0](root) : /opt/share/kaggle/data
-$hdfs dfs -put uber/  /uber
-```
+## Setup
 
 ```xml
 [1:hive-site.xml]*
@@ -28,6 +24,11 @@ $hdfs dfs -put uber/  /uber
  13 </configuration> 
 ```
 
+## Data
 
+Download data from kaggle and then upload to hdfs:
 
-
+```bash
+[14560][uu][1][bash](08:43:11)[0](root) : /opt/share/kaggle/data
+$hdfs dfs -put uber/  /uber
+```
