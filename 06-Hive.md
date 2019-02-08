@@ -89,3 +89,8 @@ For help on a particular service:
   ./hive --service serviceName --help
 Debug help:  ./hive --debug --help
 ```
+
+
+## Integration with HBase
+
+https://cwiki.apache.org/confluence/display/Hive/HBaseIntegration
