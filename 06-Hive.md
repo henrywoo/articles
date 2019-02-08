@@ -45,6 +45,31 @@ Download data from kaggle and then upload to hdfs:
 $hdfs dfs -put uber/  /uber
 ```
 
+hdfs://u3:9000/uber/Uber-Jan-Feb-FOIL.csv
+
+```csv
+dispatching_base_number,date,active_vehicles,trips
+B02512,1/1/2015,190,1132
+B02765,1/1/2015,225,1765
+B02764,1/1/2015,3427,29421
+B02682,1/1/2015,945,7679
+B02617,1/1/2015,1228,9537
+...
+```
+
+```
+$hdfs dfs -cat /uber/Uber-Jan-Feb-FOIL.csv | head
+dispatching_base_number,date,active_vehicles,trips
+B02512,1/1/2015,190,1132
+B02765,1/1/2015,225,1765
+B02764,1/1/2015,3427,29421
+B02682,1/1/2015,945,7679
+B02617,1/1/2015,1228,9537
+B02598,1/1/2015,870,6903
+B02598,1/2/2015,785,4768
+B02617,1/2/2015,1137,7065
+B02512,1/2/2015,175,875
+```
 
 ## debug
 
