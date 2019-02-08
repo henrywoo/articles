@@ -71,6 +71,56 @@ B02617,1/2/2015,1137,7065
 B02512,1/2/2015,175,875
 ```
 
+The data is available here too: https://github.com/fivethirtyeight/uber-tlc-foil-response/blob/master/Uber-Jan-Feb-FOIL.csv
+
+HSQL:
+
+```sql
+create external table IF NOT EXISTS Uber_Jan_Feb_FOIL (dispatching_base_number string,
+  trip_date string,
+  active_vehicles int,
+  trips int)
+  COMMENT 'Uber Jan Feb FOIL Data'
+  ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY ','
+  lines terminated by '\n'
+  STORED AS TEXTFILE
+  LOCATION '/uber/'
+  tblproperties ("skip.header.line.count"="1");
+load data LOCAL inpath '/opt/share/kaggle/data/uber/Uber-Jan-Feb-FOIL.csv' into table Uber_Jan_Feb_FOIL;
+```
+
+ref:
+https://stackoverflow.com/questions/44016835/how-do-we-define-date-format-in-hive-create-statment  
+https://stackoverflow.com/questions/47301455/how-to-convert-date-2017-sep-12-to-2017-09-12-in-hive/47301792#47301792  
+https://stackoverflow.com/questions/49380873/how-to-create-hive-table-with-date-format-dd-mmm-yyyy  
+
+It seems spark engine doesn't work well:
+
+```
+hive> select count(*) from Uber_Jan_Feb_FOIL;
+2019-02-08 12:38:11,628 INFO  [6c332f80-068d-4bc3-9458-84d06462f1c6 main] reducesink.VectorReduceSinkEmptyKeyOperator (VectorReduceSinkEmptyKeyOperator.java:<init>(64)) - VectorReduceSinkEmptyKeyOperator constructor vectorReduceSinkInfo org.apache.hadoop.hive.ql.plan.VectorReduceSinkInfo@63218586
+Query ID = root_20190208123810_d44a8599-ce3b-4d62-9cdb-c6dc84c3d524
+Total jobs = 1
+Launching Job 1 out of 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Failed to execute spark task, with exception 'org.apache.hadoop.hive.ql.metadata.HiveException(Failed to create Spark client for Spark session 0f5cd43e-9a8c-4e6f-9be9-fa4522b00296)'
+FAILED: Execution Error, return code 30041 from org.apache.hadoop.hive.ql.exec.spark.SparkTask. Failed to create Spark client for Spark session 0f5cd43e-9a8c-4e6f-9be9-fa4522b00296
+hive> 
+```
+
+Launch hive in debug mode:
+```
+$hive -hiveconf hive.root.logger=DEBUG,console
+```
+I found the issue is `java.lang.ClassNotFoundException: org.apache.spark.SparkConf`.
+
+
 ## debug
 
 
