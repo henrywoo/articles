@@ -322,8 +322,31 @@ SparkSession available as 'spark'.
 In [1]: 
 ```
 
+## GraphX and GraphFrames
+
+GraphX is the graph processing component built into Spark since February 2014 (Spark 0.9). It uses the legacy RDD API, which has been with the project since the very beginning.
+
+GraphFrames is a new graph processing library based on GraphX. It is a separate package released in 2016. It uses the DataFrame API, which has several significant advantages:
+
+First, DataFrames are generally more efficient than RDDs; exposing a schema to the underlying system allows many new optimizations like skipping columns when reading data. This makes GraphFrames faster than its predecessor.
+
+Second, the API in GraphFrames allows users to express their computations in terms of queries. For many users this is a more intuitive way to reason about their data. The API is also uniform across Scala, Java and Python, which is not the case for GraphX.
+
+Third, GraphFrames integrate nicely with the DataFrame data sources API. This allows the user to read or write files describing their graphs in json, csv, parquet and many other formats.
+
+GraphFrames also comes with new features, such as breadth first search and motif finding. The latter is particularly powerful; you can use it to find patterns like A -> B <- C easily.
+
+The only reason why GraphFrames didn't just replace GraphX was to maintain legacy API compatibility, but that's about it. If you’re integrating with legacy code, you can always convert your GraphFrames graph back into a GraphX graph, but not the other way round.
+
+TLDR; use GraphFrames over GraphX. It's newer, faster, more powerful, and easier to use. You can read all about it here: Introducing GraphFrames
+
 
 ## debug
 
 
 ![](img/henrywu_019.png)
+
+
+## Others
+
+From my understanding, createTempView (or more appropriately createOrReplaceTempView) has been introduced in Spark 2.0 to replace registerTempTable, which has been deprecated in 2.0. CreateTempView creates an in memory reference to the Dataframe in use. The lifetime for this is tied to the spark session in which the Dataframe was created in. createGlobalTempView (which is not present in 2.0 but is added in 2.1.0) on the other hand allows you to create the references that can be used across spark sessions. So depending upon whether you need to share data across sessions, you can use either of the methods. Ideally your notebooks in same cluster share the same spark session, but there is an option to setup clusters where each notebook has its own session. So all it boils down to is that where do you create the data frame and where do you want to access it.
