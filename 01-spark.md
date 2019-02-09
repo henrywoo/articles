@@ -16,7 +16,7 @@ I use this one:
   -Psparkr -Phive\
   -Phive-thriftserver -Pmesos -Pyarn \
   -Pkubernetes \
-  -Phadoop-3.1 -Dhadoop.version=3.1.1 \
+  -Phadoop-3.2 -Dhadoop.version=3.2.0 \
   -DskipTests clean package
 ```
 hive seems not supporting hadoop 3, so remove it from the build command:
@@ -39,6 +39,8 @@ Run Spark with Yarn:
 
 REF: https://spark.apache.org/docs/latest/building-spark.html
 
+
+Spark-hive doesn't support hadoop 3. the code is too old.
 
 ```
 java.lang.IllegalArgumentException: Unrecognized Hadoop major version number: 3.1.1
