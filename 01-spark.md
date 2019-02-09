@@ -340,6 +340,50 @@ The only reason why GraphFrames didn't just replace GraphX was to maintain legac
 
 TLDR; use GraphFrames over GraphX. It's newer, faster, more powerful, and easier to use. You can read all about it here: Introducing GraphFrames
 
+```scala
+$SPARK_LOCAL_IP=192.168.122.1 spark-shell --packages graphframes:graphframes:0.7.0-spark2.4-s_2.11  --master yarn --deploy-mode client
+Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+:: loading settings :: url = jar:file:/home/henry/share/git.repo/spark.git/assembly/target/scala-2.12/jars/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
+graphframes#graphframes added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-e522d3a7-a396-4034-b71c-52a23e7c67dc;1.0
+	confs: [default]
+	found graphframes#graphframes;0.7.0-spark2.4-s_2.11 in spark-packages
+	found org.slf4j#slf4j-api;1.7.16 in spark-list
+:: resolution report :: resolve 327ms :: artifacts dl 9ms
+	:: modules in use:
+	graphframes#graphframes;0.7.0-spark2.4-s_2.11 from spark-packages in [default]
+	org.slf4j#slf4j-api;1.7.16 from spark-list in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   2   |   0   |   0   |   0   ||   2   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-e522d3a7-a396-4034-b71c-52a23e7c67dc
+	confs: [default]
+	0 artifacts copied, 2 already retrieved (0kB/11ms)
+2019-02-09 07:56:42 WARN  NativeCodeLoader:60 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+2019-02-09 07:56:56 WARN  Client:69 - Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+Spark context Web UI available at http://uu:4040
+Spark context available as 'sc' (master = yarn, app id = application_1549718320976_0002).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.0.0-SNAPSHOT
+      /_/
+         
+Using Scala version 2.12.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_191)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> 
+```
+
 
 ## debug
 
