@@ -394,3 +394,13 @@ scala>
 ## Others
 
 From my understanding, createTempView (or more appropriately createOrReplaceTempView) has been introduced in Spark 2.0 to replace registerTempTable, which has been deprecated in 2.0. CreateTempView creates an in memory reference to the Dataframe in use. The lifetime for this is tied to the spark session in which the Dataframe was created in. createGlobalTempView (which is not present in 2.0 but is added in 2.1.0) on the other hand allows you to create the references that can be used across spark sessions. So depending upon whether you need to share data across sessions, you can use either of the methods. Ideally your notebooks in same cluster share the same spark session, but there is an option to setup clusters where each notebook has its own session. So all it boils down to is that where do you create the data frame and where do you want to access it.
+
+## Docker
+
+```
+docker pull bigdatateam/spark-course2
+export DOCKER_IMAGE=bigdatateam/spark-course2
+docker run -w /tmp/notebooks -v $(pwd)/notebooks:/tmp/notebooks --rm -p 127.0.0.1:8888:8888 $DOCKER_IMAGE sh -c 'jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir=/tmp/notebooks'
+```
+
+
