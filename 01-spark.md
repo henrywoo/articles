@@ -399,6 +399,8 @@ From my understanding, createTempView (or more appropriately createOrReplaceTemp
 
 ```
 docker pull bigdatateam/spark-course2
+mkdir notebooks
+chmod 777 notebooks
 export DOCKER_IMAGE=bigdatateam/spark-course2
 docker run -w /tmp/notebooks -v $(pwd)/notebooks:/tmp/notebooks --rm -p 127.0.0.1:8888:8888 $DOCKER_IMAGE sh -c 'jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir=/tmp/notebooks'
 ```
