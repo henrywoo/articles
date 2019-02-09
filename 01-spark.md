@@ -19,13 +19,13 @@ I use this one:
   -Phadoop-3.2 -Dhadoop.version=3.2.0 \
   -DskipTests clean package
 ```
-hive seems not supporting hadoop 3, so remove it from the build command:
+spark-hive-connector seems not supporting hadoop 3, so remove it from the build command:
 ```
 ./build/mvn \
   -Psparkr \
   -Pmesos -Pyarn \
   -Pkubernetes \
-  -Phadoop-3.1 -Dhadoop.version=3.1.1 \
+  -Phadoop-3.2 -Dhadoop.version=3.2.0 \
   -DskipTests clean package
 ```
 
@@ -321,3 +321,9 @@ SparkSession available as 'spark'.
 
 In [1]: 
 ```
+
+
+## debug
+
+
+![](img/henrywu_019.png)

@@ -7,6 +7,12 @@ https://cwiki.apache.org/confluence/display/Hive/Streaming+Data+Ingest
 
 Hive - Version 3.1.1
 
+## developer guide
+
+https://cwiki.apache.org/confluence/display/Hive/DeveloperGuide
+
+`mvn package -DskipTests -Pdist`
+
 ## Setup
 
 ```xml
@@ -144,3 +150,28 @@ Debug help:  ./hive --debug --help
 ## Integration with HBase
 
 https://cwiki.apache.org/confluence/display/Hive/HBaseIntegration
+
+
+## Deepdive
+
+When you run `hive`, actually the following command is running:
+
+```
+exec /opt/share/software/jdk1.8.0_191/bin/java 
+  -Dproc_jar -Djava.net.preferIPv4Stack=true 
+  -Djava.library.path=/home/henry/share/software/HadoopEcosystem/hadoop/lib/native
+  -Dproc_hivecli 
+  -Dlog4j.configurationFile=hive-log4j2.properties 
+  -Djava.util.logging.config.file=/opt/share/software/HadoopEcosystem/hive/conf/parquet-logging.properties 
+  -Dyarn.log.dir=/opt/hadoop/log -Dyarn.log.file=hadoop.log 
+  -Dyarn.home.dir=/opt/share/software/HadoopEcosystem/hadoop -Dyarn.root.logger=INFO,console -Xmx256m 
+  -Dhadoop.log.dir=/opt/hadoop/log -Dhadoop.log.file=hadoop.log 
+  -Dhadoop.home.dir=/opt/share/software/HadoopEcosystem/hadoop 
+  -Dhadoop.id.str=root 
+  -Dhadoop.root.logger=INFO,console 
+  -Dhadoop.policy.file=hadoop-policy.xml 
+  -Dhadoop.security.logger=INFO,NullAppender
+  org.apache.hadoop.util.RunJar
+  /opt/share/software/HadoopEcosystem/hive/lib/hive-cli-3.1.1.jar
+  org.apache.hadoop.hive.cli.CliDriver
+```
