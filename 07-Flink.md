@@ -6,4 +6,5 @@ https://ci.apache.org/projects/flink/flink-docs-release-1.7/flinkDev/building.ht
 
 `mvn clean install -DskipTests`
 
+![](img/henrywu_020.png)
 
