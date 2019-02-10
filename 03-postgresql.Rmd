@@ -1,6 +1,7 @@
-# Methods
 
-```
+# PostgreSQL
+
+```bash
 $apt install postgresql
 Reading package lists... Done
 Building dependency tree       

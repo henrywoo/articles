@@ -2,7 +2,13 @@
 
 [RDD PAPER](pdf/rdd.pdf)
 
-## Spark
+## DEV
+
+![](http://www.iconarchive.com/download/i31689/sykonist/south-park/Cartman-Ninja-crossed.ico)https://issues.apache.org/jira/browse/SPARK-18673
+
+Spark-hive doesn't support hadoop3.x.
+
+https://spark.apache.org/developer-tools.html#reducing-build-times
 
 Build from source since I could not find spark for hadoop 3.1.1
 
@@ -29,6 +35,265 @@ spark-hive-connector seems not supporting hadoop 3, so remove it from the build 
   -Pkubernetes \
   -Phadoop-3.2 -Dhadoop.version=3.2.0 \
   -DskipTests clean package
+```
+
+
+```
+[15721][uu][5][bash](09:59:17)[0](root) : /opt/share/git.repo/spark.git
+$./build/sbt assembly
+Using /opt/share/software/jdk1.8.0_191 as default JAVA_HOME.
+Note, this will be overridden by -java-home if it is set.
+Attempting to fetch sbt
+Launching sbt from build/sbt-launch-0.13.18.jar
+[info] Loading global plugins from /home/henry/.sbt/0.13/plugins
+[info] Loading project definition from /home/henry/share/git.repo/spark.git/project
+[info] Resolving key references (18679 settings) ...
+[info] Set current project to spark-parent (in build file:/home/henry/share/git.repo/spark.git/)
+[info] Compiling 508 Scala sources and 77 Java sources to /home/henry/share/git.repo/spark.git/core/target/scala-2.12/cl...
+...
+✔ /opt/share/git.repo/spark.git/dev [henrywu|●1✚ 4…4] 
+09:19 # ./make-distribution.sh 
+...
+[INFO] Reactor Summary for Spark Project Parent POM 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] Spark Project Parent POM ........................... SUCCESS [ 12.165 s]
+[INFO] Spark Project Tags ................................. SUCCESS [ 12.188 s]
+[INFO] Spark Project Sketch ............................... SUCCESS [  9.895 s]
+[INFO] Spark Project Local DB ............................. SUCCESS [  6.394 s]
+[INFO] Spark Project Networking ........................... SUCCESS [ 12.573 s]
+[INFO] Spark Project Shuffle Streaming Service ............ SUCCESS [  7.319 s]
+[INFO] Spark Project Unsafe ............................... SUCCESS [ 13.363 s]
+[INFO] Spark Project Launcher ............................. SUCCESS [  9.184 s]
+[INFO] Spark Project Core ................................. SUCCESS [04:48 min]
+[INFO] Spark Project ML Local Library ..................... SUCCESS [  9.002 s]
+[INFO] Spark Project GraphX ............................... SUCCESS [ 16.310 s]
+[INFO] Spark Project Streaming ............................ SUCCESS [ 39.498 s]
+[INFO] Spark Project Catalyst ............................. SUCCESS [02:32 min]
+[INFO] Spark Project SQL .................................. SUCCESS [04:13 min]
+[INFO] Spark Project ML Library ........................... SUCCESS [02:03 min]
+[INFO] Spark Project Tools ................................ SUCCESS [  0.972 s]
+[INFO] Spark Project Hive ................................. SUCCESS [ 53.605 s]
+[INFO] Spark Project REPL ................................. SUCCESS [  6.058 s]
+[INFO] Spark Project Assembly ............................. SUCCESS [  5.842 s]
+[INFO] Spark Integration for Kafka 0.10 ................... SUCCESS [  9.744 s]
+[INFO] Kafka 0.10+ Token Provider for Streaming ........... SUCCESS [  2.670 s]
+[INFO] Kafka 0.10+ Source for Structured Streaming ........ SUCCESS [ 17.177 s]
+[INFO] Spark Project Examples ............................. SUCCESS [ 27.661 s]
+[INFO] Spark Integration for Kafka 0.10 Assembly .......... SUCCESS [ 15.336 s]
+[INFO] Spark Avro ......................................... SUCCESS [ 10.186 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18:37 min
+[INFO] Finished at: 2019-02-10T09:19:27-08:00
+[INFO] ------------------------------------------------------------------------
++ rm -rf /opt/share/git.repo/spark.git/dist
++ mkdir -p /opt/share/git.repo/spark.git/dist/jars
++ echo 'Spark 1 (git revision 8cd25a0fdb) built for Hadoop null object or invalid expression'
+...
+09:21 # ll /opt/share/git.repo/spark.git/dist/jars
+total 149480
+drwxr-xr-x  2 root root    12288 Feb 10 09:19 ./
+drwxr-xr-x 13 root root     4096 Feb 10 09:19 ../
+-rw-r--r--  1 root root    30035 Feb 10 09:19 accessors-smart-1.2.jar
+-rw-r--r--  1 root root    69409 Feb 10 09:19 activation-1.1.1.jar
+-rw-r--r--  1 root root   134044 Feb 10 09:19 aircompressor-0.10.jar
+-rw-r--r--  1 root root   336803 Feb 10 09:19 antlr4-runtime-4.7.1.jar
+-rw-r--r--  1 root root    14766 Feb 10 09:19 aopalliance-repackaged-2.4.0-b34.jar
+-rw-r--r--  1 root root  1194003 Feb 10 09:19 arpack_combined_all-0.1.jar
+-rw-r--r--  1 root root    59274 Feb 10 09:19 arrow-format-0.12.0.jar
+-rw-r--r--  1 root root    83458 Feb 10 09:19 arrow-memory-0.12.0.jar
+-rw-r--r--  1 root root  1326772 Feb 10 09:19 arrow-vector-0.12.0.jar
+-rw-r--r--  1 root root  1556863 Feb 10 09:19 avro-1.8.2.jar
+-rw-r--r--  1 root root   132989 Feb 10 09:19 avro-ipc-1.8.2.jar
+-rw-r--r--  1 root root   187052 Feb 10 09:19 avro-mapred-1.8.2-hadoop2.jar
+-rw-r--r--  1 root root 13319481 Feb 10 09:19 breeze_2.12-0.13.2.jar
+-rw-r--r--  1 root root   125330 Feb 10 09:19 breeze-macros_2.12-0.13.2.jar
+-rw-r--r--  1 root root   195811 Feb 10 09:19 chill_2.12-0.9.3.jar
+-rw-r--r--  1 root root    58633 Feb 10 09:19 chill-java-0.9.3.jar
+-rw-r--r--  1 root root   246174 Feb 10 09:19 commons-beanutils-1.9.3.jar
+-rw-r--r--  1 root root    41123 Feb 10 09:19 commons-cli-1.2.jar
+-rw-r--r--  1 root root   284184 Feb 10 09:19 commons-codec-1.10.jar
+-rw-r--r--  1 root root   588337 Feb 10 09:19 commons-collections-3.2.2.jar
+-rw-r--r--  1 root root    37894 Feb 10 09:19 commons-compiler-3.0.11.jar
+-rw-r--r--  1 root root   365552 Feb 10 09:19 commons-compress-1.8.1.jar
+-rw-r--r--  1 root root   616888 Feb 10 09:19 commons-configuration2-2.1.1.jar
+-rw-r--r--  1 root root   134595 Feb 10 09:19 commons-crypto-1.0.0.jar
+-rw-r--r--  1 root root   185140 Feb 10 09:19 commons-io-2.4.jar
+-rw-r--r--  1 root root   284220 Feb 10 09:19 commons-lang-2.6.jar
+-rw-r--r--  1 root root   501879 Feb 10 09:19 commons-lang3-3.8.1.jar
+-rw-r--r--  1 root root  2035066 Feb 10 09:19 commons-math3-3.4.1.jar
+-rw-r--r--  1 root root   273370 Feb 10 09:19 commons-net-3.1.jar
+-rw-r--r--  1 root root   197176 Feb 10 09:19 commons-text-1.6.jar
+-rw-r--r--  1 root root    79845 Feb 10 09:19 compress-lzf-1.0.3.jar
+-rw-r--r--  1 root root   164422 Feb 10 09:19 core-1.1.2.jar
+-rw-r--r--  1 root root    69500 Feb 10 09:19 curator-client-2.7.1.jar
+-rw-r--r--  1 root root   186273 Feb 10 09:19 curator-framework-2.7.1.jar
+-rw-r--r--  1 root root   270342 Feb 10 09:19 curator-recipes-2.7.1.jar
+-rw-r--r--  1 root root   307637 Feb 10 09:19 dnsjava-2.1.7.jar
+-rw-r--r--  1 root root    18497 Feb 10 09:19 flatbuffers-java-1.9.0.jar
+-rw-r--r--  1 root root   190432 Feb 10 09:19 gson-2.2.4.jar
+-rw-r--r--  1 root root  2189117 Feb 10 09:19 guava-14.0.1.jar
+-rw-r--r--  1 root root    60244 Feb 10 09:19 hadoop-annotations-3.2.0.jar
+-rw-r--r--  1 root root   139058 Feb 10 09:19 hadoop-auth-3.2.0.jar
+-rw-r--r--  1 root root    44149 Feb 10 09:19 hadoop-client-3.2.0.jar
+-rw-r--r--  1 root root  4092595 Feb 10 09:19 hadoop-common-3.2.0.jar
+-rw-r--r--  1 root root  5023516 Feb 10 09:19 hadoop-hdfs-client-3.2.0.jar
+-rw-r--r--  1 root root   805832 Feb 10 09:19 hadoop-mapreduce-client-common-3.2.0.jar
+-rw-r--r--  1 root root  1656425 Feb 10 09:19 hadoop-mapreduce-client-core-3.2.0.jar
+-rw-r--r--  1 root root    85877 Feb 10 09:19 hadoop-mapreduce-client-jobclient-3.2.0.jar
+-rw-r--r--  1 root root  3282880 Feb 10 09:19 hadoop-yarn-api-3.2.0.jar
+-rw-r--r--  1 root root   317928 Feb 10 09:19 hadoop-yarn-client-3.2.0.jar
+-rw-r--r--  1 root root  2897440 Feb 10 09:19 hadoop-yarn-common-3.2.0.jar
+-rw-r--r--  1 root root   178947 Feb 10 09:19 hk2-api-2.4.0-b34.jar
+-rw-r--r--  1 root root   181271 Feb 10 09:19 hk2-locator-2.4.0-b34.jar
+-rw-r--r--  1 root root   118973 Feb 10 09:19 hk2-utils-2.4.0-b34.jar
+-rw-r--r--  1 root root  1671083 Feb 10 09:19 hppc-0.7.2.jar
+-rw-r--r--  1 root root  1502280 Feb 10 09:19 htrace-core4-4.1.0-incubating.jar
+-rw-r--r--  1 root root   767140 Feb 10 09:19 httpclient-4.5.6.jar
+-rw-r--r--  1 root root   326356 Feb 10 09:19 httpcore-4.4.10.jar
+-rw-r--r--  1 root root  1282424 Feb 10 09:19 ivy-2.4.0.jar
+-rw-r--r--  1 root root    66981 Feb 10 09:19 jackson-annotations-2.9.6.jar
+-rw-r--r--  1 root root   323848 Feb 10 09:19 jackson-core-2.9.6.jar
+-rw-r--r--  1 root root   232248 Feb 10 09:19 jackson-core-asl-1.9.13.jar
+-rw-r--r--  1 root root  1349339 Feb 10 09:19 jackson-databind-2.9.6.jar
+-rw-r--r--  1 root root    32373 Feb 10 09:19 jackson-jaxrs-base-2.9.5.jar
+-rw-r--r--  1 root root    15864 Feb 10 09:19 jackson-jaxrs-json-provider-2.9.5.jar
+-rw-r--r--  1 root root   780664 Feb 10 09:19 jackson-mapper-asl-1.9.13.jar
+-rw-r--r--  1 root root    32832 Feb 10 09:19 jackson-module-jaxb-annotations-2.9.6.jar
+-rw-r--r--  1 root root    42883 Feb 10 09:19 jackson-module-paranamer-2.9.6.jar
+-rw-r--r--  1 root root   343926 Feb 10 09:19 jackson-module-scala_2.12-2.9.6.jar
+-rw-r--r--  1 root root   847054 Feb 10 09:19 janino-3.0.11.jar
+-rw-r--r--  1 root root   714194 Feb 10 09:19 javassist-3.18.1-GA.jar
+-rw-r--r--  1 root root    26366 Feb 10 09:19 javax.annotation-api-1.2.jar
+-rw-r--r--  1 root root     5950 Feb 10 09:19 javax.inject-2.4.0-b34.jar
+-rw-r--r--  1 root root    95806 Feb 10 09:19 javax.servlet-api-3.1.0.jar
+-rw-r--r--  1 root root   115534 Feb 10 09:19 javax.ws.rs-api-2.0.1.jar
+-rw-r--r--  1 root root   102244 Feb 10 09:19 jaxb-api-2.2.11.jar
+-rw-r--r--  1 root root     4722 Feb 10 09:19 jcip-annotations-1.0-1.jar
+-rw-r--r--  1 root root    16515 Feb 10 09:19 jcl-over-slf4j-1.7.25.jar
+-rw-r--r--  1 root root   167421 Feb 10 09:19 jersey-client-2.22.2.jar
+-rw-r--r--  1 root root   698375 Feb 10 09:19 jersey-common-2.22.2.jar
+-rw-r--r--  1 root root    18098 Feb 10 09:19 jersey-container-servlet-2.22.2.jar
+-rw-r--r--  1 root root    66270 Feb 10 09:19 jersey-container-servlet-core-2.22.2.jar
+-rw-r--r--  1 root root   971310 Feb 10 09:19 jersey-guava-2.22.2.jar
+-rw-r--r--  1 root root    72733 Feb 10 09:19 jersey-media-jaxb-2.22.2.jar
+-rw-r--r--  1 root root   951701 Feb 10 09:19 jersey-server-2.22.2.jar
+-rw-r--r--  1 root root   128579 Feb 10 09:19 jetty-webapp-9.4.12.v20180830.jar
+-rw-r--r--  1 root root    52044 Feb 10 09:19 jetty-xml-9.4.12.v20180830.jar
+-rw-r--r--  1 root root   627814 Feb 10 09:19 joda-time-2.9.3.jar
+-rw-r--r--  1 root root    83376 Feb 10 09:19 json4s-ast_2.12-3.5.3.jar
+-rw-r--r--  1 root root   489399 Feb 10 09:19 json4s-core_2.12-3.5.3.jar
+-rw-r--r--  1 root root    40086 Feb 10 09:19 json4s-jackson_2.12-3.5.3.jar
+-rw-r--r--  1 root root   346628 Feb 10 09:19 json4s-scalap_2.12-3.5.3.jar
+-rw-r--r--  1 root root   120316 Feb 10 09:19 json-smart-2.3.jar
+-rw-r--r--  1 root root   100636 Feb 10 09:19 jsp-api-2.1.jar
+-rw-r--r--  1 root root    33031 Feb 10 09:19 jsr305-3.0.0.jar
+-rw-r--r--  1 root root   764569 Feb 10 09:19 jtransforms-2.4.0.jar
+-rw-r--r--  1 root root     4596 Feb 10 09:19 jul-to-slf4j-1.7.25.jar
+-rw-r--r--  1 root root    80980 Feb 10 09:19 kerb-admin-1.0.1.jar
+-rw-r--r--  1 root root   113017 Feb 10 09:19 kerb-client-1.0.1.jar
+-rw-r--r--  1 root root    65464 Feb 10 09:19 kerb-common-1.0.1.jar
+-rw-r--r--  1 root root   226672 Feb 10 09:19 kerb-core-1.0.1.jar
+-rw-r--r--  1 root root   116120 Feb 10 09:19 kerb-crypto-1.0.1.jar
+-rw-r--r--  1 root root    20046 Feb 10 09:19 kerb-identity-1.0.1.jar
+-rw-r--r--  1 root root    82756 Feb 10 09:19 kerb-server-1.0.1.jar
+-rw-r--r--  1 root root    20409 Feb 10 09:19 kerb-simplekdc-1.0.1.jar
+-rw-r--r--  1 root root    36708 Feb 10 09:19 kerb-util-1.0.1.jar
+-rw-r--r--  1 root root   102174 Feb 10 09:19 kerby-asn1-1.0.1.jar
+-rw-r--r--  1 root root    30674 Feb 10 09:19 kerby-config-1.0.1.jar
+-rw-r--r--  1 root root   204650 Feb 10 09:19 kerby-pkix-1.0.1.jar
+-rw-r--r--  1 root root    40554 Feb 10 09:19 kerby-util-1.0.1.jar
+-rw-r--r--  1 root root    29134 Feb 10 09:19 kerby-xdr-1.0.1.jar
+-rw-r--r--  1 root root   410874 Feb 10 09:19 kryo-shaded-4.0.2.jar
+-rw-r--r--  1 root root  1045744 Feb 10 09:19 leveldbjni-all-1.8.jar
+-rw-r--r--  1 root root   489884 Feb 10 09:19 log4j-1.2.17.jar
+-rw-r--r--  1 root root   511547 Feb 10 09:19 lz4-java-1.5.0.jar
+-rw-r--r--  1 root root    33650 Feb 10 09:19 machinist_2.12-0.6.1.jar
+-rw-r--r--  1 root root     3180 Feb 10 09:19 macro-compat_2.12-1.1.1.jar
+-rw-r--r--  1 root root   120465 Feb 10 09:19 metrics-core-3.1.5.jar
+-rw-r--r--  1 root root    21247 Feb 10 09:19 metrics-graphite-3.1.5.jar
+-rw-r--r--  1 root root    15824 Feb 10 09:19 metrics-json-3.1.5.jar
+-rw-r--r--  1 root root    39283 Feb 10 09:19 metrics-jvm-3.1.5.jar
+-rw-r--r--  1 root root     5711 Feb 10 09:19 minlog-1.3.0.jar
+-rw-r--r--  1 root root  1330219 Feb 10 09:19 netty-3.9.9.Final.jar
+-rw-r--r--  1 root root  3885158 Feb 10 09:19 netty-all-4.1.30.Final.jar
+-rw-r--r--  1 root root   299508 Feb 10 09:19 nimbus-jose-jwt-4.41.1.jar
+-rw-r--r--  1 root root    54391 Feb 10 09:19 objenesis-2.5.1.jar
+-rw-r--r--  1 root root   331034 Feb 10 09:19 okhttp-2.7.5.jar
+-rw-r--r--  1 root root    65928 Feb 10 09:19 okio-1.6.0.jar
+-rw-r--r--  1 root root    19827 Feb 10 09:19 opencsv-2.3.jar
+-rw-r--r--  1 root root  1565376 Feb 10 09:19 orc-core-1.5.4-nohive.jar
+-rw-r--r--  1 root root   812220 Feb 10 09:19 orc-mapreduce-1.5.4-nohive.jar
+-rw-r--r--  1 root root    27742 Feb 10 09:19 orc-shims-1.5.4.jar
+-rw-r--r--  1 root root    65261 Feb 10 09:19 oro-2.0.8.jar
+-rw-r--r--  1 root root    20235 Feb 10 09:19 osgi-resource-locator-1.0.1.jar
+-rw-r--r--  1 root root    34654 Feb 10 09:19 paranamer-2.8.jar
+-rw-r--r--  1 root root  1097799 Feb 10 09:19 parquet-column-1.10.1.jar
+-rw-r--r--  1 root root    94995 Feb 10 09:19 parquet-common-1.10.1.jar
+-rw-r--r--  1 root root   848750 Feb 10 09:19 parquet-encoding-1.10.1.jar
+-rw-r--r--  1 root root   723203 Feb 10 09:19 parquet-format-2.4.0.jar
+-rw-r--r--  1 root root   285732 Feb 10 09:19 parquet-hadoop-1.10.1.jar
+-rw-r--r--  1 root root  1048171 Feb 10 09:19 parquet-jackson-1.10.1.jar
+-rw-r--r--  1 root root   533455 Feb 10 09:19 protobuf-java-2.5.0.jar
+-rw-r--r--  1 root root   122939 Feb 10 09:19 py4j-0.10.8.1.jar
+-rw-r--r--  1 root root    94796 Feb 10 09:19 pyrolite-4.13.jar
+-rw-r--r--  1 root root   128414 Feb 10 09:19 re2j-1.1.jar
+-rw-r--r--  1 root root   201928 Feb 10 09:19 RoaringBitmap-0.5.11.jar
+-rw-r--r--  1 root root 10508278 Feb 10 09:19 scala-compiler-2.12.8.jar
+-rw-r--r--  1 root root  5272591 Feb 10 09:19 scala-library-2.12.8.jar
+-rw-r--r--  1 root root   225042 Feb 10 09:19 scala-parser-combinators_2.12-1.1.0.jar
+-rw-r--r--  1 root root  3645095 Feb 10 09:19 scala-reflect-2.12.8.jar
+-rw-r--r--  1 root root   548430 Feb 10 09:19 scala-xml_2.12-1.0.5.jar
+-rw-r--r--  1 root root  2829843 Feb 10 09:19 shapeless_2.12-2.3.2.jar
+-rw-r--r--  1 root root    41203 Feb 10 09:19 slf4j-api-1.7.25.jar
+-rw-r--r--  1 root root    12244 Feb 10 09:19 slf4j-log4j12-1.7.25.jar
+-rw-r--r--  1 root root  2019013 Feb 10 09:19 snappy-java-1.1.7.1.jar
+-rw-r--r--  1 root root  7322042 Feb 10 09:19 spark-catalyst_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  9030915 Feb 10 09:19 spark-core_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root   428738 Feb 10 09:19 spark-graphx_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    53256 Feb 10 09:19 spark-kvstore_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    76885 Feb 10 09:19 spark-launcher_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  5363920 Feb 10 09:19 spark-mllib_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root   101627 Feb 10 09:19 spark-mllib-local_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  2398657 Feb 10 09:19 spark-network-common_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    70873 Feb 10 09:19 spark-network-shuffle_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    51392 Feb 10 09:19 spark-repl_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    30441 Feb 10 09:19 spark-sketch_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  5892298 Feb 10 09:19 spark-sql_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  1150974 Feb 10 09:19 spark-streaming_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    15249 Feb 10 09:19 spark-tags_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root    50247 Feb 10 09:19 spark-unsafe_2.12-3.0.0-SNAPSHOT.jar
+-rw-r--r--  1 root root  9660469 Feb 10 09:19 spire_2.12-0.13.0.jar
+-rw-r--r--  1 root root    69702 Feb 10 09:19 spire-macros_2.12-0.13.0.jar
+-rw-r--r--  1 root root   161867 Feb 10 09:19 stax2-api-3.1.4.jar
+-rw-r--r--  1 root root   174351 Feb 10 09:19 stream-2.7.0.jar
+-rw-r--r--  1 root root    18763 Feb 10 09:19 token-provider-1.0.1.jar
+-rw-r--r--  1 root root   404970 Feb 10 09:19 univocity-parsers-2.7.3.jar
+-rw-r--r--  1 root root    63777 Feb 10 09:19 validation-api-1.1.0.Final.jar
+-rw-r--r--  1 root root   512742 Feb 10 09:19 woodstox-core-5.0.3.jar
+-rw-r--r--  1 root root   290180 Feb 10 09:19 xbean-asm7-shaded-4.12.jar
+-rw-r--r--  1 root root    99555 Feb 10 09:19 xz-1.5.jar
+-rw-r--r--  1 root root   792964 Feb 10 09:19 zookeeper-3.4.6.jar
+-rw-r--r--  1 root root  2333186 Feb 10 09:19 zstd-jni-1.3.2-2.jar
+```
+
+Environmental variables settings:
+```bash
+#### Spark ####
+export SPARK_GIT_HOME=/opt/share/git.repo/spark.git
+export SPARK_HOME=/opt/share/git.repo/spark.git/dist
+export PATH=$PATH:$SPARK_HOME/bin
+
+export CLASSPATH=.:$SCALA_HOME/lib/*:$CLASSPATH
+export CLASSPATH=$CLASSPATH:$SPARK_HOME/jars/*
+export CLASSPATH=$CLASSPATH:/home/henry/share/software/db-derby-10.14.2.0-bin/lib/*
+
+# remove duplicates
+export PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+export CLASSPATH=$(printf "%s" "$CLASSPATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+
+export PYSPARK_DRIVER_PYTHON='ipython'
 ```
 
 

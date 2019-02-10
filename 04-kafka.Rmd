@@ -1,6 +1,6 @@
 # kafka
 
-# How to debug kafka
+## How to debug kafka
 
 ```bash
 ✔ /opt/share/git.repo/kafka.git [henrywu {origin/henrywu}|✔] 
