@@ -1,5 +1,7 @@
 # Spark
 
+![](pdf/rdd.pdf)
+
 ## Spark
 
 Build from source since I could not find spark for hadoop 3.1.1
