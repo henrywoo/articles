@@ -384,6 +384,19 @@ Type :help for more information.
 scala> 
 ```
 
+- kill a spark job
+
+`yarn application -kill application_1549747463877_0002`
+
+- optimize launch
+
+```
+hdfs dfs -put /opt/share/git.repo/spark.git/assembly/target/scala-2.12/jars /sparkjars
+```
+
+then add `spark.yarn.jars hdfs://u3:9000/sparkjars/jars/*` to `conf/spark-defaults.conf`.
+
+
 
 ## debug
 
