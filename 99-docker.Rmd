@@ -1,0 +1,47 @@
+
+# Docker
+
+## Customize docker image location
+
+```
+[16250][uu][0][bash](08:06:32)[0](root) : ~
+$ccat /etc/default/docker 
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 -g /opt/share/docker"
+[16251][uu][0][bash](08:06:38)[0](root) : ~
+```
+
+```
+$docker help cp 
+
+Usage:	docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+	docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+
+Copy files/folders between a container and the local filesystem
+
+Options:
+  -a, --archive       Archive mode (copy all uid/gid information)
+  -L, --follow-link   Always follow symbol link in SRC_PATH
+```
+
+
+Slack channel: Press here to go to Slack
+Your score is 0.
+
+Grade system output:
+===== Testing (num. 901): STARTING =====
+Executing notebook with kernel: python2
+Testing (num. 901): test RES2_3 failed!
+RES2_3 description: The task should produce from 2 to 6 jobs
+Testing (num. 901): test DFS0 failed!
+DFS0 description: Check that the output contains exactly one line.
+Hint: try to redirect all extra output from jobs to /dev/null because
+it may contain the output from the framework
+Testing (num. 901): test MRB17 failed!
+MRB17 description: Your output is empty. Maybe your code contains some errors.
+Please, check that you haven't got errors in the logs and try to view the Application Master or Spark History UI.
+
+===== Testing (num. 901): SUMMARY =====
+Tests passed: crs901_1 crs901_2 crs901_3 crs901_4
+Tests failed: res2_3 dfs0 mrb17
+==================================================
+0

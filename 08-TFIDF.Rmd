@@ -1,0 +1,70 @@
+
+# TF-IDF
+
+
+Term frequency-inverse document frequency (TF-IDF) is a feature vectorization method widely used in text mining to reflect the importance of a term to a document in the corpus. Denote a term by t, a document by d, and the corpus by D. Term frequency TF(t,d) is the number of times that term t appears in document d, while **document frequency** $DF(t,D)$ is the number of documents that contains term t. If we only use term frequency to measure the importance, it is very easy to over-emphasize terms that appear very often but carry little information about the document, e.g., “a”, “the”, and “of”. If a term appears very often across the corpus, it means it doesn’t carry special information about a particular document. **Inverse document frequency** is a numerical measure of how much information a term provides:
+
+$$IDF(t,D)=\dfrac{log|D|+1}{DF(t,D)+1}$$
+
+where |D| is the total number of documents in the corpus. Since logarithm is used, if a term appears in all documents, its IDF value becomes 0. Note that a smoothing term is applied to avoid dividing by zero for terms outside the corpus. The TF-IDF measure is simply the product of TF and IDF:
+
+$$TFIDF(t,d,D)=TF(t,d)⋅IDF(t,D)$$
+
+There are several variants on the definition of term frequency and document frequency.
+
+
+## data
+
+415K  
+
+`/opt/share/coursera/Big_Data_Essentials_HDFS_MapReduce_and_Spark_RDD/data/wikipedia.txt`
+
+Stop words list is in `/opt/share/coursera/Big_Data_Essentials_HDFS_MapReduce_and_Spark_RDD/data/stop_words_en.txt` file.
+
+Format: `article_id <tab> article_text`
+
+Output: tf*idf for term=`labor` and article_id=`12`
+
+The result on the sample dataset:
+
+0.000351
+
+## Mapreduce
+
+## Spark MLlib
+
+How to replace the algorithm insie Mllib?? No idea.
+
+org/apache/spark/mllib/feature/IDF.scala
+
+```scala
+    /** Returns the current IDF vector, docFreq, number of documents */
+    def idf(): (Vector, Array[Long], Long) = {
+      if (isEmpty) {
+        throw new IllegalStateException("Haven't seen any document yet.")
+      }
+      val n = df.length
+      val inv = new Array[Double](n)
+      val dfv = new Array[Long](n)
+      var j = 0
+      while (j < n) {
+        /*
+         * If the term is not present in the minimum
+         * number of documents, set IDF to 0. This
+         * will cause multiplication in IDFModel to
+         * set TF-IDF to 0.
+         *
+         * Since arrays are initialized to 0 by default,
+         * we just omit changing those entries.
+         */
+        if (df(j) >= minDocFreq) {
+          inv(j) = math.log((m + 1.0) / (df(j) + 1.0))
+          dfv(j) = df(j)
+        }
+        j += 1
+      }
+      (Vectors.dense(inv), dfv, m)
+    }
+```
+
+## Flink

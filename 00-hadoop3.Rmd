@@ -3,6 +3,9 @@
 
 ## Hadoop
 
+- stable for production: v 2.8.5
+- dev: 3.2.0
+
 ```
 13:09 # ll /opt/share/software/HadoopEcosystem/hadoop/
 total 212
@@ -26,6 +29,8 @@ data node: u4,u5,u6
 
 ### prepare for hadoop folders
 
+- Hadoop 320
+
 ```
 for i in `seq 3 6`; do
 ansible u$i -a "rm -fr /opt/hadoop";
@@ -41,6 +46,59 @@ done
 
 ansible u3 -a "mkdir -p /opt/hadoop/name";
 ```
+
+- Hadoop 285
+
+```
+export HADOOP_DEPLOY_ROOT=/opt/hadoop285
+sss 2
+for i in `seq 3 6` u; do
+  ansible u$i -a "rm -fr $HADOOP_DEPLOY_ROOT";
+done
+
+for i in `seq 3 6` u; do
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/data";
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/pid";
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/log";
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/tmp";
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/mr-history/tmp";
+ansible u$i -a "mkdir -p $HADOOP_DEPLOY_ROOT/mr-history/done";
+done
+
+ansible u3 -a "mkdir -p $HADOOP_DEPLOY_ROOT/name";
+```
+
+at ~/.bashrc
+
+```
+# also hadoop-env.sh
+export HADOOP_DEPLOY_ROOT=/opt/hadoop285
+export HADOOP_HOME=/opt/share/software/HadoopEcosystem/hadoop
+
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+export HADOOP_PID_DIR=$HADOOP_DEPLOY_ROOT/pid
+export HADOOP_LOG_DIR=$HADOOP_DEPLOY_ROOT/log
+
+export HDFS_NAMENODE_USER=root
+export HDFS_DATANODE_USER=root
+export HDFS_SECONDARYNAMENODE_USER=root
+# required by spark
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-/etc/hadoop/conf}
+# WARNING: YARN_CONF_DIR has been replaced by HADOOP_CONF_DIR. Using value of YARN_CONF_DIR.
+#export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export YARN_RESOURCEMANAGER_USER="root"
+export YARN_NODEMANAGER_USER="root"
+
+# yarn-env.sh
+export HADOOP_DEPLOY_ROOT=/opt/hadoop285
+export YARN_LOG_DIR=$HADOOP_DEPLOY_ROOT/log
+```
+
+https://stackoverflow.com/questions/22332760/how-can-i-specify-hadoop-xml-configuration-variables-via-the-hadoop-shell-script
+
+HDFS: [http://u3:2850](http://u3:2850)  
+cluster: [http://u3:7088](http://u3:7088)
 
 ### init namenode
 

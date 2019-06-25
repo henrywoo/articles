@@ -1,0 +1,5 @@
+
+# Beam
+
+`./gradlew build`
+

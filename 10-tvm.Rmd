@@ -1,0 +1,34 @@
+
+# TVM
+
+```
+$make -j8 install
+[  2%] Built target vta
+[ 11%] Built target tvm_runtime
+[ 87%] Built target tvm
+[ 87%] Built target tvm_topi
+[100%] Built target nnvm_compiler
+Install the project...
+-- Install configuration: ""
+-- Installing: /usr/local/lib/libtvm.so
+-- Set runtime path of "/usr/local/lib/libtvm.so" to ""
+-- Installing: /usr/local/lib/libtvm_topi.so
+-- Set runtime path of "/usr/local/lib/libtvm_topi.so" to ""
+-- Installing: /usr/local/lib/libtvm_runtime.so
+-- Installing: /usr/local/lib/libnnvm_compiler.so
+-- Set runtime path of "/usr/local/lib/libnnvm_compiler.so" to ""
+-- Installing: /usr/local/include/tvm/runtime/.
+-- Installing: /usr/local/include/tvm/runtime/./threading_backend.h
+-- Installing: /usr/local/include/tvm/runtime/./c_backend_api.h
+-- Installing: /usr/local/include/tvm/runtime/./serializer.h
+-- Installing: /usr/local/include/tvm/runtime/./registry.h
+-- Installing: /usr/local/include/tvm/runtime/./device_api.h
+-- Installing: /usr/local/include/tvm/runtime/./object.h
+-- Installing: /usr/local/include/tvm/runtime/./ndarray.h
+-- Installing: /usr/local/include/tvm/runtime/./node_base.h
+-- Installing: /usr/local/include/tvm/runtime/./vm.h
+-- Installing: /usr/local/include/tvm/runtime/./c_runtime_api.h
+-- Installing: /usr/local/include/tvm/runtime/./util.h
+-- Installing: /usr/local/include/tvm/runtime/./packed_func.h
+-- Installing: /usr/local/include/tvm/runtime/./module.h
+```

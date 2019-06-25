@@ -2,6 +2,19 @@
 
 [RDD PAPER](pdf/rdd.pdf)
 
+## Production
+
+```
+export SPARK_HOME=/opt/share/software/HadoopEcosystem/spark
+```
+and set conf files.
+
+data: `/opt/share/coursera/Big_Data_Analysis_Hive_Spark_SQL_DataFrames_and_GraphFrames/week4/graphDFSample`
+
+```
+d=spark.read.load("file:///opt/share/coursera/Big_Data_Analysis_Hive_Spark_SQL_DataFrames_and_GraphFrames/week4/graphDFSample")
+```
+
 ## DEV
 
 ![](http://www.iconarchive.com/download/i31689/sykonist/south-park/Cartman-Ninja-crossed.ico)https://issues.apache.org/jira/browse/SPARK-18673
@@ -29,12 +42,51 @@ I use this one:
 ```
 spark-hive-connector seems not supporting hadoop 3, so remove it from the build command:
 ```
-./build/mvn \
-  -Psparkr \
-  -Pmesos -Pyarn \
-  -Pkubernetes \
-  -Phadoop-3.2 -Dhadoop.version=3.2.0 \
-  -DskipTests clean package
+./build/mvn   -Psparkr   -Pmesos -Pyarn   -Pkubernetes
+  -Phadoop-3.2 -Dhadoop.version=3.2.0 -DskipTests 
+  -Pbigtop-dist -Psbt -Pspark-ganglia-lgpl -Phadoop-cloud package
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spark Project Parent POM 3.0.0-SNAPSHOT:
+[INFO] 
+[INFO] Spark Project Parent POM ........................... SUCCESS [  8.826 s]
+[INFO] Spark Project Tags ................................. SUCCESS [ 14.300 s]
+[INFO] Spark Project Sketch ............................... SUCCESS [ 13.190 s]
+[INFO] Spark Project Local DB ............................. SUCCESS [  6.466 s]
+[INFO] Spark Project Networking ........................... SUCCESS [ 13.518 s]
+[INFO] Spark Project Shuffle Streaming Service ............ SUCCESS [ 10.571 s]
+[INFO] Spark Project Unsafe ............................... SUCCESS [ 19.864 s]
+[INFO] Spark Project Launcher ............................. SUCCESS [ 17.397 s]
+[INFO] Spark Project Core ................................. SUCCESS [05:05 min]
+[INFO] Spark Project ML Local Library ..................... SUCCESS [  9.911 s]
+[INFO] Spark Project GraphX ............................... SUCCESS [ 16.971 s]
+[INFO] Spark Project Streaming ............................ SUCCESS [ 39.431 s]
+[INFO] Spark Project Catalyst ............................. SUCCESS [02:04 min]
+[INFO] Spark Project SQL .................................. SUCCESS [06:37 min]
+[INFO] Spark Project ML Library ........................... SUCCESS [02:49 min]
+[INFO] Spark Project Tools ................................ SUCCESS [  2.844 s]
+[INFO] Spark Project Hive ................................. SUCCESS [01:05 min]
+[INFO] Spark Project REPL ................................. SUCCESS [  7.124 s]
+[INFO] Spark Project YARN Shuffle Service ................. SUCCESS [ 18.103 s]
+[INFO] Spark Project YARN ................................. SUCCESS [ 13.632 s]
+[INFO] Spark Project Mesos ................................ SUCCESS [  9.339 s]
+[INFO] Spark Project Kubernetes ........................... SUCCESS [  9.660 s]
+[INFO] Spark Ganglia Integration .......................... SUCCESS [  3.659 s]
+[INFO] Spark Project Cloud Integration through Hadoop Libraries SUCCESS [  4.587 s]
+[INFO] Spark Project Assembly ............................. SUCCESS [ 27.710 s]
+[INFO] Spark Integration for Kafka 0.10 ................... SUCCESS [ 10.741 s]
+[INFO] Kafka 0.10+ Token Provider for Streaming ........... SUCCESS [  4.544 s]
+[INFO] Kafka 0.10+ Source for Structured Streaming ........ SUCCESS [ 14.702 s]
+[INFO] Spark Project Examples ............................. SUCCESS [ 24.841 s]
+[INFO] Spark Integration for Kafka 0.10 Assembly .......... SUCCESS [ 18.636 s]
+[INFO] Spark Avro ......................................... SUCCESS [  6.891 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  23:31 min
+[INFO] Finished at: 2019-02-10T13:00:04-08:00
+[INFO] ------------------------------------------------------------------------
+✔ /home/henry/share/git.repo/spark.git [henrywu|✚ 1…5] 
 ```
 
 
@@ -590,6 +642,8 @@ In [1]:
 ```
 
 ## GraphX and GraphFrames
+
+[PAPER](pdf/graphframes.pdf)
 
 GraphX is the graph processing component built into Spark since February 2014 (Spark 0.9). It uses the legacy RDD API, which has been with the project since the very beginning.
 
